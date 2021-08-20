@@ -1,0 +1,33 @@
+<ng-container *ngIf="!isLoad; else elseTemplate">
+    <div>
+        <div class="wrapper">
+            <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+                <app-sidebar></app-sidebar>
+                <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+            </div>
+            <div class="main-panel" id="main-pan">
+                <app-navbar></app-navbar>
+                <router-outlet></router-outlet>
+                <div *ngIf="isMaps('maps')">
+                    <app-footer></app-footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="center">
+        <div class="loader">
+            <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <circle class="load one" cx="60" cy="60" r="40" />
+              <circle class="load two" cx="60" cy="60" r="40" />
+              <circle class="load three" cx="60" cy="60" r="40" />
+              <g>
+                <circle class="point one" cx="45" cy="70" r="5" />
+                <circle class="point two" cx="60" cy="70" r="5" />
+                <circle class="point three" cx="75" cy="70" r="5" />
+              </g>
+            </svg>
+        </div>
+    </div>
+</ng-template>
