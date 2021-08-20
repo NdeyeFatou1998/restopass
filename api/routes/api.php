@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\CompteController;
+use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\RestoController;
+use App\Http\Controllers\VigilController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,19 +12,45 @@ use Illuminate\Support\Facades\Route;
  * AUTH ROUTES
  */
 
-Route::prefix('admin')->middleware(['guest', 'cors'])->group(function () {
+Route::prefix('admin')->middleware(['auth:admin', 'cors'])->group(function () {
     Route::post('/login', [AuthController::class, 'login'])
-        ->name('admin-login');
+        ->name('admin-login')
+        ->withoutMiddleware('auth:admin');
 
     Route::post('/register', [AuthController::class, 'register'])
         ->name('admin-register');
+
+    Route::post('admin/logout', [AuthController::class, 'logout'])
+        ->name("admin-logout");
+
+    Route::post('affecter-vigil', [VigilController::class, 'affecterA']);
 });
 
-Route::post('admin/logout', [AuthController::class, 'logout'])
-    ->name("admin-logout")
-    ->middleware("auth");
+
 
 
 Route::prefix('resto')->middleware(['auth:admin'])->group(function () {
     Route::get('/', [RestoController::class, 'index']);
+});
+
+Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
+    Route::post('/register', [EtudiantController::class, 'store'])->withoutMiddleware('auth:api');
+    Route::post('/login', [EtudiantController::class, 'login'])->withoutMiddleware('auth:api');
+    Route::get('/', [EtudiantController::class, 'user']);
+
+    Route::post('pin', [CompteController::class, 'createPin']);
+    Route::patch('pin', [CompteController::class, 'setPin']);
+
+    Route::post('transfert', [CompteController::class, 'transfert']);
+});
+
+
+
+
+Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
+    Route::post('/register', [VigilController::class, 'store'])->withoutMiddleware('auth:controller');
+    Route::post('/login', [VigilController::class, 'login'])->withoutMiddleware('auth:controller');
+
+    Route::get('/', [VigilController::class, 'user']);
+    Route::post('/scanner', [VigilController::class, 'scanner']);
 });

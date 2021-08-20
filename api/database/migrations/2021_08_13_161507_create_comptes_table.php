@@ -20,10 +20,10 @@ class CreateComptesTable extends Migration
             $table->unsignedBigInteger("debt")->default(0);
             $table->boolean("status")->default(true);
             $table->string("account_code")->unique();
-            
+            $table->string("pin")->nullable();
             $table->foreignId("user_id")->unique()->index();
             $table->foreign("user_id")->references("id")->on("users");
-            
+
             $table->timestamps();
         });
     }

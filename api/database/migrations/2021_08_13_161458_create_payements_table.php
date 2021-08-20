@@ -26,9 +26,9 @@ class CreatePayementsTable extends Migration
             $table->foreignId("user_id")->index();
             $table->foreign("user_id")->references("id")->on("users");
 
-            $table->foreignId("montant_id");
-            $table->foreign("montant_id")->references("id")->on("montants");
-            
+            $table->foreignId("tarif_id");
+            $table->foreign("tarif_id")->references("id")->on("tarifs");
+
             $table->timestamps();
         });
     }

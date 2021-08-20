@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMontantsTable extends Migration
+class CreateTarifsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMontantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('montants', function (Blueprint $table) {
+        Schema::create('tarifs', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->nullable();
-            $table->unsignedInteger("amount");
+            $table->string("name");
+            $table->integer("price");
+            $table->integer("code")->unique();
             $table->foreignId("edit_by");
             $table->foreignId("update_by");
             $table->foreign("edit_by")->references("id")->on("admins");
@@ -32,6 +33,6 @@ class CreateMontantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('montants');
+        Schema::dropIfExists('tarifs');
     }
 }
