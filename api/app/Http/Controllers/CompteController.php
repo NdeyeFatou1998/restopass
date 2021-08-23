@@ -133,4 +133,16 @@ class CompteController extends Controller
     {
         # code...
     }
+
+    public function setAccountCode()
+    {
+        $user = auth()->user();
+        $compte = Compte::whereUserId(auth()->id())->first();
+        $compte->account_code = $user->matricule . time();
+        $compte->save();
+        return response()->json([
+            'user' => $user,
+            'compte' => $compte
+        ], 200);
+    }
 }

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use Exception;
 use App\Models\Tarif;
 use App\Models\Vigil;
 use App\Models\Compte;
 use App\Models\Payement;
-use DateTime;
-use Illuminate\Support\Str;
+use App\Utils\Constante as C;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class VigilController extends Controller
 {
@@ -60,7 +61,7 @@ class VigilController extends Controller
         return response()->json([
             'message' => 'Vigil ajouté avec succès.',
             'vigil' => $vigil
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -69,17 +70,26 @@ class VigilController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|string|email|max:255|exists:vigils,email',
+            'matricule' => 'required|string|max:255|exists:vigils,matricule',
             'password' => 'required|string|min:6',
         ]);
 
-        $user = Vigil::where('email', $request->email)->first();
-
+        $user = Vigil::where('matricule', $request->matricule)->first();
+        if ($user->resto_id == null) {
+            return response()->json([
+                'message' => 'Vous n\'étes affecté à aucun resto pour le moment.',
+                'code' => C::NOT_IN_RESTO
+            ], 400);
+        }
         if (Hash::check($request->password, $user->password)) {
             $token = $user->createToken('Vigil Password Grant Client')->accessToken;
             $response = [
                 'token' => $token,
-                'user' => $user,
+                'user' => DB::table("vigils as U")
+                    ->join("restos as R", "R.id", "U.resto_id")
+                    ->select("U.name", "U.id", "R.id as resto_id", "U.telephone", "U.matricule", "U.email", "U.image_path", "R.name as resto")
+                    ->first(),
+                'tarifs' => Tarif::all()
             ];
             return response($response, 200);
         } else {
@@ -88,6 +98,11 @@ class VigilController extends Controller
                 'code' => 400
             ], 400);
         }
+    }
+
+    public function logout()
+    {
+        throw new Exception('Not implemented.');
     }
 
     public function user()
@@ -104,7 +119,7 @@ class VigilController extends Controller
         $tarif = Tarif::whereCode($request->tarif)->first();
 
         $compte = Compte::whereAccountNum($request->compte)
-            ->orWhere("account_code", $request->compte)
+            ->orWhere("account_code", "=", $request->compte)
             ->first();
         if ($compte == null) {
             return response()->json([
