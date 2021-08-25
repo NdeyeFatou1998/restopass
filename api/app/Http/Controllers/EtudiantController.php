@@ -69,8 +69,8 @@ class EtudiantController extends Controller
         if ($validator->fails()) {
             return response([
                 "message" => "Email et mot de passe sont requis.",
-                'code' => 422
-            ], 422);
+                'code' => 400
+            ], 400);
         }
         $user = User::where('email', $request->email)->first();
 
