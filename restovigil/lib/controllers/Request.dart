@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:restovigil/models/LoginError.dart';
 
 import 'package:restovigil/models/LoginResponse.dart';
+import 'package:restovigil/models/Tarif.dart';
+import 'package:restovigil/utils/SharedPref.dart';
 import 'package:restovigil/utils/Utils.dart';
 
 class Request {
@@ -27,4 +31,36 @@ class Request {
         body: json.encode({'matricule': qr, 'password': PASS}),
         headers: headers);
   }
+
+  static Future<List<Tarif>?> getTarifs(BuildContext context) async {
+    var uri = Uri.parse(API + '/tarifs');
+    String? token = await SharedPref.getToken();
+    if (token == null) {
+      logOut(context);
+    }
+
+    var client = new http.Client();
+
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token!
+    };
+    var response = await client.get(uri, headers: hdrs);
+    if (response.statusCode == 200) {
+      return tarifsFromJson(response.body);
+    } else {
+      return null;
+    }
+  }
+}
+
+class AuthException implements Exception {
+  late int _error;
+  late String _message;
+
+  AuthException(this._message, this._error);
+
+  int get error => _error;
+  String get message => _message;
 }

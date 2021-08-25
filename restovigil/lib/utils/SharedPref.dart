@@ -12,6 +12,8 @@ class SharedPref {
   static final String RESTO_NAME = "resto_name";
   static final String RESTO_CAP = "resto_cap";
 
+  static final String TOKEN = "token";
+
   static saveUser(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(USER_EMAIL, user.email);
@@ -48,5 +50,15 @@ class SharedPref {
     prefs.remove(USER_ID);
     prefs.remove(RESTO_ID);
     prefs.remove(RESTO_NAME);
+  }
+
+  static Future<String?> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(TOKEN) ?? null;
+  }
+
+  static saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(TOKEN, token);
   }
 }

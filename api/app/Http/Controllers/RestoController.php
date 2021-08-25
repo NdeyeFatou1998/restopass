@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resto;
+use App\Models\Tarif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,4 +53,9 @@ class RestoController extends Controller
     {
         # code...
     }
+
+	public function tarifs(){
+		return Tarif::all();
+	}
+	
 }

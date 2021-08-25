@@ -50,13 +50,16 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
 
 Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
     Route::post('/register', [VigilController::class, 'store'])->withoutMiddleware('auth:controller');
+	Route::post('/login', [VigilController::class, 'login'])->withoutMiddleware('auth:controller');
     Route::post('/logout', [VigilController::class, 'logout']);
 
     Route::get('/', [VigilController::class, 'user']);
     Route::post('/scanner', [VigilController::class, 'scanner']);
 });
 
-Route::post('/vigil/login', [VigilController::class, 'login']);
+Route::get('tarifs',  [RestoController::class, 'tarifs'])->middleware(['auth:controller']);
+
+
 
 
 
