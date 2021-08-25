@@ -123,7 +123,7 @@ class VigilController extends Controller
             ->first();
         if ($compte == null) {
             return response()->json([
-                'message' => 'Votre compte est introuvable.',
+                'message' => 'Votre carte est invalide.' ,
                 'code' => 404
             ], 404);
         }
@@ -141,7 +141,7 @@ class VigilController extends Controller
             $scanner->tarif_id = $tarif->id;
             $scanner->save();
 
-            return response()->json(['message' => 'Ok', 'code' => 200], 200);
+            return response()->json(['message' => 'Contrôler avec succès.' . $tarif->price . ' FCFA', 'code' => 200], 200);
         } else {
             return response()->json([
                 'message' => 'Votre solde est insuffisant.',

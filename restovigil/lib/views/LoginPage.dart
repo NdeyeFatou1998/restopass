@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 30,
             ),
             _isLoad == true
-                ? progressBar("Traitement en cours...")
+                ? progressBar("Traitement en cours...", 80)
                 : Container(),
             SizedBox(
               height: 30,
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _splashScreen() {
-    return Scaffold(body: Center(child: progressBar("Resto Pass")));
+    return Scaffold(body: Center(child: progressBar("Resto Pass", 100)));
   }
 
   void _login(BuildContext context) async {
@@ -142,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
           break;
         case 422:
           setState(() {
-            errors = new LoginError("Veuillez vérifier votra carte.", true);
+            errors = new LoginError(
+                "La carte que vous utilisez est invalide.", true);
           });
           break;
         case 400:

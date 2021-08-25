@@ -3,7 +3,7 @@ import 'package:restovigil/controllers/Request.dart';
 import 'package:restovigil/models/Tarif.dart';
 import 'package:restovigil/models/User.dart';
 import 'package:restovigil/utils/Utils.dart';
-import 'package:restovigil/views/Scanner.dart';
+import 'package:restovigil/views/ScannerPage.dart';
 
 class HomePage extends StatefulWidget {
   User? user;
@@ -35,7 +35,11 @@ class _HomePageState extends State<HomePage> {
               return IconButton(
                 icon: const Icon(Icons.logout, color: Colors.white),
                 onPressed: () {
-                  //logOut(context);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return customDialog(context);
+                      });
                 },
               );
             },
@@ -53,6 +57,7 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                   alignment: Alignment.topCenter,
@@ -101,8 +106,7 @@ class _HomePageState extends State<HomePage> {
                           textAlign: TextAlign.center),
                     ],
                   )),
-              Container(
-                  child: FutureBuilder(
+              FutureBuilder(
                 future: _tarifsFuture,
                 builder: (
                   BuildContext context,
@@ -110,8 +114,9 @@ class _HomePageState extends State<HomePage> {
                 ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Container(
-                      color: Colors.white,
-                      child: Center(child: Text("LOAD...")),
+                      margin: EdgeInsets.only(top: 30),
+                      child:
+                          progressBar("Chargement des tarifs en cours...", 50),
                     );
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
@@ -125,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     return Text('State: ${snapshot.connectionState}');
                   }
                 },
-              ))
+              )
             ],
           ),
         ));
@@ -159,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                 padding:
                     EdgeInsets.only(top: 7, left: 10, right: 10, bottom: 7),
                 child: _cardItem(context, data[1].name, data[1].price,
-                    "assets/images/dinner.jpg", data[0].code),
+                    "assets/images/dinner.jpg", data[1].code),
               ),
             ],
           ),
@@ -169,7 +174,7 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.only(left: 15.0),
             padding: EdgeInsets.only(top: 7, left: 10, right: 10, bottom: 7),
             child: _cardItem(context, data[2].name, data[2].price,
-                "assets/images/dinner.png", data[0].code),
+                "assets/images/dinner.png", data[2].code),
           ),
         ],
       ),
@@ -177,37 +182,53 @@ class _HomePageState extends State<HomePage> {
   }
 
   _errorWidget(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(left: 30, right: 30, bottom: 50, top: 30),
-        padding: EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 5,
-              offset: Offset(0, 2), // changes position of shadow
+    return Column(
+      children: [
+        Container(
+            margin: EdgeInsets.only(left: 30, right: 30, bottom: 50, top: 30),
+            padding: EdgeInsets.all(20),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 5,
+                  blurRadius: 5,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.error_outline_outlined, color: Colors.red),
-            SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                "Merci de vérifier votre connexion.",
-              ),
+            child: Row(
+              children: [
+                Icon(Icons.error_outline_outlined, color: Colors.red),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Merci de vérifier votre connexion.",
+                  ),
+                ),
+              ],
+            )),
+        ElevatedButton(
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(8.0),
+              backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR),
+              foregroundColor: MaterialStateProperty.all(Colors.white),
             ),
-          ],
-        ));
+            onPressed: () {
+              setState(() {
+                _tarifsFuture = Request.getTarifs(context);
+              });
+            },
+            child: Text("Ressayer"))
+      ],
+    );
   }
 
   Widget _cardItem(
@@ -258,6 +279,77 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  customDialog(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(left: 20, top: 50, right: 20, bottom: 20),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(.5),
+                    offset: Offset(0, 5),
+                    blurRadius: 5),
+              ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                "Voulez-vous vous deconnecter?",
+                style: TextStyle(fontSize: 15, fontFamily: "Poppins Light"),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Annuler',
+                        style: TextStyle(fontSize: 18),
+                      )),
+                  TextButton(
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        logOut(context);
+                      },
+                      child: Text(
+                        'Oui',
+                        style: TextStyle(fontSize: 18),
+                      )),
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

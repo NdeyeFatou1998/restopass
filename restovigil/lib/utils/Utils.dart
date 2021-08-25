@@ -17,7 +17,7 @@ const String PASS = "restopass.vigil";
 // CODE EXCEPTION
 final int UNAUTH = 401;
 
-Widget progressBar(String message) {
+Widget progressBar(String message, double size) {
   return Container(
     alignment: Alignment.center,
     child: Column(
@@ -30,7 +30,7 @@ Widget progressBar(String message) {
               angleRange: 360,
               spinnerMode: true,
               startAngle: 90,
-              size: 100,
+              size: size,
               customColors: CustomSliderColors(
                 hideShadow: true,
                 progressBarColor: PRIMARY_COLOR,
