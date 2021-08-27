@@ -25,4 +25,9 @@ class User {
       lastName: json['last_name'],
       email: json['email'],
       imagePath: json['image_path']);
+
+  @override
+  String toString() {
+    return "USER: id: $id, email: $email, name: $firstName $lastName,matricule: $matricule";
+  }
 }

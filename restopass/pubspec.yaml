@@ -15,6 +15,11 @@ dependencies:
   qr_code_scanner: ^0.5.2
   sleek_circular_slider: ^2.0.1
   shared_preferences: ^2.0.7
+  pin_code_fields: ^7.3.0
+  curved_navigation_bar: ^1.0.1
+  money_formatter: ^0.0.3
+  pretty_qr_code: ^2.0.2
+  curved_drawer_fork: ^0.0.1+1
 
 dev_dependencies:
   flutter_test:

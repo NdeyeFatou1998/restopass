@@ -3,29 +3,32 @@ import 'package:restopass/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  static final String USER_EMAIL = "user_email";
-  static final String USER_MATRICULE = "user_matricule";
-  static final String USER_NAME = "user_name";
-  static final String USER_IMAGE_PATH = "image_path";
-  static final String USER_ID = "user_id";
-  static final String USER_FIRST_NAME = "first_name";
-  static final String USER_LAST_NAME = "last_name";
+  static const String USER_EMAIL = "user_email";
+  static const String USER_MATRICULE = "user_matricule";
+  static const String USER_NAME = "user_name";
+  static const String USER_IMAGE_PATH = "image_path";
+  static const String USER_ID = "user_id";
+  static const String USER_FIRST_NAME = "first_name";
+  static const String USER_LAST_NAME = "last_name";
 
-  static final String TOKEN = "token";
+  static const String TOKEN = "token";
 
-  static final String COMPTE_ID = "compte_id";
-  static final String COMPTE_NUM = "compte_num";
-  static final String COMPTE_CODE = "compte_code";
-  static final String COMPTE_PAY = 'compte_pay';
-  static final String COMPTE_STATUS = 'compte_status';
-  static final String COMPTE_DEBT = 'compte_debt';
-  static final String COMPTE_USER_ID = 'compte_user_id';
+  static const String COMPTE_ID = "compte_id";
+  static const String COMPTE_NUM = "compte_num";
+  static const String COMPTE_CODE = "compte_code";
+  static const String COMPTE_PAY = 'compte_pay';
+  static const String COMPTE_STATUS = 'compte_status';
+  static const String COMPTE_DEBT = 'compte_debt';
+  static const String COMPTE_USER_ID = 'compte_user_id';
+
+  static const String COMPTE_PIN = 'pin';
 
   static saveUser(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(USER_MATRICULE, user.matricule);
     prefs.setInt(USER_ID, user.id);
     prefs.setString(USER_FIRST_NAME, user.firstName);
+    prefs.setString(USER_EMAIL, user.email);
     prefs.setString(USER_LAST_NAME, user.lastName);
   }
 
@@ -77,5 +80,35 @@ class SharedPref {
         id: prefs.getInt(COMPTE_ID) ?? -1,
         pay: prefs.getInt(COMPTE_PAY) ?? -1,
         userId: prefs.getInt(COMPTE_USER_ID) ?? -1);
+  }
+
+  static Future setPin(String pin) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(COMPTE_PIN, pin);
+  }
+
+  static Future<String?> getPin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(COMPTE_PIN);
+  }
+
+  static removeUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(USER_EMAIL);
+    prefs.remove(USER_MATRICULE);
+    prefs.remove(USER_NAME);
+    prefs.remove(USER_IMAGE_PATH);
+    prefs.remove(USER_ID);
+    prefs.remove(USER_FIRST_NAME);
+    prefs.remove(USER_LAST_NAME);
+    prefs.remove(TOKEN);
+    prefs.remove(COMPTE_ID);
+    prefs.remove(COMPTE_NUM);
+    prefs.remove(COMPTE_CODE);
+    prefs.remove(COMPTE_PAY);
+    prefs.remove(COMPTE_STATUS);
+    prefs.remove(COMPTE_DEBT);
+    prefs.remove(COMPTE_USER_ID);
+    prefs.remove(COMPTE_PIN);
   }
 }

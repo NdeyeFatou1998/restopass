@@ -32,4 +32,9 @@ class Compte {
         pin: json['pin'],
         userId: json['user_id'],
       );
+
+  @override
+  String toString() {
+    return "COMPTE: id:$id,NUM: $accountNum, CODE: $accountCode, PAY: $pay, DEBT: $debt";
+  }
 }

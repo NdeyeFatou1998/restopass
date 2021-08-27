@@ -2,7 +2,7 @@
     package="com.example.restopass">
     <uses-permission android:name="android.permission.CAMERA" />
    <application
-        android:label="restopass"
+        android:label="Resto Pass"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

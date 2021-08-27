@@ -9,6 +9,7 @@ import 'package:restopass/utils/Utils.dart';
 import 'package:restopass/utils/Widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:restopass/views/CodePinPage.dart';
+import 'package:restopass/views/GivePinPage.dart';
 import 'package:restopass/views/HomePage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -85,57 +86,22 @@ class _LoginPageState extends State<LoginPage> {
                   child: spinner(PRIMARY_COLOR, 30))
               : submitButton(onPressed: () async {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  FocusScope.of(context).unfocus();
                   if (_formKey.currentState!.validate()) {
                     setState(() {
                       _isLoad = true;
                     });
                     print("LOGIN DATA," + data.toString());
-                    http.Response result = await Request.login(data);
-                    log("RESULT:::::::::::" + result.body);
-                    if (result.statusCode == 200) {
-                      LoginResponse res = loginResponseFromJson(result.body);
-                      await SharedPref.saveUser(res.user);
-                      await SharedPref.setCompte(res.compte);
-                      await SharedPref.setToken(res.token);
-                      if (res.compte.pin == null) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CodePinPage(res.user)));
-                      } else {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage(res.user)));
-                      }
-                    } else if (result.statusCode == 422) {
-                      print(result.body);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.red,
-                          elevation: 8.0,
-                          duration: Duration(seconds: 5),
-                          content: Text('Email ou mot de passe incorrecte.'),
-                          action: SnackBarAction(
-                            label: 'Fermer',
-                            textColor: Colors.white,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                            },
-                          ),
-                        ),
-                      );
-                    } else if (result.statusCode == 400) {
-                      print(result.body);
+                    http.Response? result = await Request.login(data);
+                    if (result == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           behavior: SnackBarBehavior.floating,
                           backgroundColor: Colors.red,
                           elevation: 8.0,
                           duration: Duration(seconds: 3),
-                          content: Text('Email et mot de passe requis.'),
+                          content:
+                              Text('Impossible de se connecter au serveur.'),
                           action: SnackBarAction(
                             label: 'Fermer',
                             textColor: Colors.white,
@@ -146,6 +112,68 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       );
+                    } else {
+                      log("RESULT:::::::::::" + result.body);
+                      if (result.statusCode == 200) {
+                        LoginResponse res = loginResponseFromJson(result.body);
+                        await SharedPref.saveUser(res.user);
+                        await SharedPref.setCompte(res.compte);
+                        await SharedPref.setToken(res.token);
+                        if (res.compte.pin == null) {
+                          // creer un nouveau pin
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      CodePinPage(res.user, res.compte)));
+                        } else if (res.compte.pin != null) {
+                          // donner son pin
+                          await SharedPref.setPin(res.compte.pin ?? '');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      GivePinPage(res.user, res.compte)));
+                        }
+                      } else if (result.statusCode == 422) {
+                        print(result.body);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            elevation: 8.0,
+                            duration: Duration(seconds: 5),
+                            content: Text('Email ou mot de passe incorrecte.'),
+                            action: SnackBarAction(
+                              label: 'Fermer',
+                              textColor: Colors.white,
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              },
+                            ),
+                          ),
+                        );
+                      } else if (result.statusCode == 400) {
+                        print(result.body);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            elevation: 8.0,
+                            duration: Duration(seconds: 3),
+                            content: Text('Email et mot de passe requis.'),
+                            action: SnackBarAction(
+                              label: 'Fermer',
+                              textColor: Colors.white,
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              },
+                            ),
+                          ),
+                        );
+                      }
                     }
                     setState(() {
                       _isLoad = false;

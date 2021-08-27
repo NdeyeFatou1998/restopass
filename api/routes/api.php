@@ -43,6 +43,7 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
     Route::patch('code', [CompteController::class, 'setAccountCode']);
 
     Route::post('transfert', [CompteController::class, 'transfert']);
+    Route::get('transfert', [CompteController::class, 'transferts']);
 });
 
 

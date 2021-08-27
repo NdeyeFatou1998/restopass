@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:restopass/utils/Utils.dart';
 import 'package:restopass/views/SplashScreenPage.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  runApp(MyApp());
+  initializeDateFormatting('fr_FR', null).then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +17,6 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       title: APP_NAME,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: SplashScreenPage(),
     );
   }

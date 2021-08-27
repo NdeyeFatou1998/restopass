@@ -9,16 +9,16 @@ import 'package:http/http.dart' as http;
 import 'package:restopass/utils/Widget.dart';
 import 'package:restopass/views/HomePage.dart';
 
-class CodePinPage extends StatefulWidget {
+class GivePinPage extends StatefulWidget {
   late User user;
   late Compte compte;
-  CodePinPage(this.user, this.compte, {Key? key}) : super(key: key);
+  GivePinPage(this.user, this.compte, {Key? key}) : super(key: key);
 
   @override
-  _CodePinPageState createState() => _CodePinPageState();
+  _GivePinPageState createState() => _GivePinPageState();
 }
 
-class _CodePinPageState extends State<CodePinPage> {
+class _GivePinPageState extends State<GivePinPage> {
   bool _isLoad = false;
   late String _pasteText;
 
@@ -48,7 +48,14 @@ class _CodePinPageState extends State<CodePinPage> {
                                 fontFamily: "Poppins Light")),
                       ],
                     )
-                  : Container(),
+                  : Container(
+                      child: TextButton(
+                      onPressed: () async {},
+                      child: Text("Code d'accès oublié?",
+                          style: TextStyle(
+                              color: PRIMARY_COLOR,
+                              decoration: TextDecoration.underline)),
+                    )),
             ],
           ),
         ));
@@ -80,7 +87,7 @@ class _CodePinPageState extends State<CodePinPage> {
                       fontSize: 30,
                       fontFamily: "Poppins Bold",
                     )),
-                Text("Ajouter un code pin pour plus de securité.",
+                Text("Saisisser votre code d'accès.",
                     style: TextStyle(
                         color: Colors.white, fontFamily: "Poppins Light"))
               ],
@@ -119,35 +126,36 @@ class _CodePinPageState extends State<CodePinPage> {
         enableActiveFill: true,
         onCompleted: (v) async {
           print("Completed $v");
-          setState(() {
-            _isLoad = true;
-          });
-          http.Response? result = await Request.createPin(v);
-          if (result == null)
-            print("TOKEN NULL");
-          else {
-            print("CREATE PIN !!!!!!!!!!!!!!!!!!!! " + result.body);
-            switch (result.statusCode) {
-              case 200:
-                await SharedPref.setPin(v);
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(widget.user, widget.compte)));
-                break;
-              case 500:
-                print(result.body);
-                break;
-              case 422:
-                print("RESPONSE CODE: " + result.body);
-                break;
-              case 401:
-                logOut(context);
-                break;
-              default:
-            }
+          setState(() => _isLoad = true);
+          String? code = await SharedPref.getPin();
+          print("CODE LOCAL: $code, IN: $v");
+          if (code == null) {
+            logOut(context);
+          } else if (code == v) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        HomePage(widget.user, widget.compte)));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.redAccent,
+                elevation: 8.0,
+                duration: Duration(seconds: 5),
+                content: Text('Code d\'accès incorrect.'),
+                action: SnackBarAction(
+                  label: 'Fermer',
+                  textColor: Colors.white,
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  },
+                ),
+              ),
+            );
           }
+          setState(() => _isLoad = false);
         },
         onChanged: (value) {
           print(value);

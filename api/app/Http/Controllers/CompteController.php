@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Compte;
 use App\Models\Transfert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompteController extends Controller
@@ -92,9 +93,8 @@ class CompteController extends Controller
             return response()->json([
                 'message' => 'Le compte n\'existe pas.',
                 'code' => 404
-            ], 422);
+            ], 404);
         }
-
         if ($from->pay >= $amount) {
             $from->pay -= $amount;
             $from->save();
@@ -124,6 +124,18 @@ class CompteController extends Controller
                 'code' => 422
             ], 422);
         }
+    }
+
+    /**
+     * Voir la liste de envoies
+     */
+    public function transferts()
+    {
+        return DB::table("transferts as T")
+            ->whereFromId(auth()->id())
+            ->join('users as U', 'U.id', 'T.to_id')
+            ->select("T.amount", 'T.created_at as date', 'U.first_name', 'U.last_name')
+            ->get();
     }
 
     /**
