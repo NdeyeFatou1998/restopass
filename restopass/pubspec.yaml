@@ -20,6 +20,9 @@ dependencies:
   money_formatter: ^0.0.3
   pretty_qr_code: ^2.0.2
   curved_drawer_fork: ^0.0.1+1
+  currency_text_input_formatter: ^2.1.2
+  mask_input_formatter: ^0.0.3
+  currency_textfield: ^2.0.0
 
 dev_dependencies:
   flutter_test:

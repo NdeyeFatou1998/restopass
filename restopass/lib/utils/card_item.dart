@@ -4,8 +4,10 @@ import 'package:restopass/models/Tranfer.dart';
 
 class CardItem extends StatefulWidget {
   final Transfert transfer;
+  final int user;
 
   CardItem(
+    this.user,
     this.transfer, {
     Key? key,
   }) : super(key: key);
@@ -17,7 +19,7 @@ class CardItem extends StatefulWidget {
 class _CardItemState extends State<CardItem> {
   @override
   Widget build(BuildContext context) {
-    bool mode = widget.transfer.amount < 0;
+    bool mode = widget.user != widget.transfer.toOrFrom;
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: 5, left: 5, right: 5),

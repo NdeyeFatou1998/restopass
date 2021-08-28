@@ -50,6 +50,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  currency_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: currency_text_input_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.2"
+  currency_textfield:
+    dependency: "direct main"
+    description:
+      name: currency_textfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   curved_drawer_fork:
     dependency: "direct main"
     description:
@@ -128,6 +142,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  mask_input_formatter:
+    dependency: "direct main"
+    description:
+      name: mask_input_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   matcher:
     dependency: transitive
     description:

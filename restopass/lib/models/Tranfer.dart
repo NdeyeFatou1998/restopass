@@ -10,18 +10,21 @@ class Transfert {
       {required this.amount,
       required this.date,
       required this.firstName,
-      required this.lastName});
+      required this.lastName,
+      required this.toOrFrom});
 
   String firstName;
   String lastName;
   String date;
   int amount;
+  int toOrFrom;
 
   factory Transfert.fromJson(Map<String, dynamic> json) => Transfert(
         amount: json["amount"],
         date: json["date"],
         firstName: json["first_name"],
         lastName: json["last_name"],
+        toOrFrom: json["to_from"],
       );
 
   @override
@@ -34,6 +37,6 @@ class Transfert {
         "\n" +
         "TO : " +
         firstName +
-        " $lastName \n";
+        " $lastName , TO OR FROM: $toOrFrom\n";
   }
 }

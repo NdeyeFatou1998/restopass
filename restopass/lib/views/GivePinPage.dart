@@ -101,7 +101,7 @@ class _GivePinPageState extends State<GivePinPage> {
       padding: EdgeInsets.symmetric(horizontal: 30),
       child: PinCodeTextField(
         length: 4,
-        obscureText: false,
+        obscureText: true,
         appContext: context,
         cursorColor: PRIMARY_COLOR,
         keyboardAppearance: Brightness.light,
@@ -135,8 +135,8 @@ class _GivePinPageState extends State<GivePinPage> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        HomePage(widget.user, widget.compte)));
+                    builder: (context) => HomePage(
+                        widget.user, ValueNotifier<Compte>(widget.compte))));
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

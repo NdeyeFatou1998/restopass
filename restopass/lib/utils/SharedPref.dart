@@ -87,6 +87,16 @@ class SharedPref {
     prefs.setString(COMPTE_PIN, pin);
   }
 
+  static Future setPay(int pay) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(COMPTE_PAY, pay);
+  }
+
+  static Future<int?> getPay() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(COMPTE_PAY);
+  }
+
   static Future<String?> getPin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(COMPTE_PIN);

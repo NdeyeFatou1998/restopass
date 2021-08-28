@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       title: APP_NAME,
+      theme:
+          ThemeData(backgroundColor: Colors.white, primaryColor: PRIMARY_COLOR),
       home: SplashScreenPage(),
     );
   }

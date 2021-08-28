@@ -40,13 +40,9 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [topPart(context), centerPart(context), bottomPart(context)],
+        children: [topPart(context), centerPart(context)],
       ),
     ));
-  }
-
-  bottomPart(BuildContext context) {
-    return Container();
   }
 
   centerPart(BuildContext context) {
@@ -85,33 +81,14 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.center,
                   child: spinner(PRIMARY_COLOR, 30))
               : submitButton(onPressed: () async {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  FocusScope.of(context).unfocus();
                   if (_formKey.currentState!.validate()) {
                     setState(() {
                       _isLoad = true;
                     });
-                    print("LOGIN DATA," + data.toString());
                     http.Response? result = await Request.login(data);
                     if (result == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.red,
-                          elevation: 8.0,
-                          duration: Duration(seconds: 3),
-                          content:
-                              Text('Impossible de se connecter au serveur.'),
-                          action: SnackBarAction(
-                            label: 'Fermer',
-                            textColor: Colors.white,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                            },
-                          ),
-                        ),
-                      );
+                      toast(context, Colors.red,
+                          "Impossible de se connecter au serveur.");
                     } else {
                       log("RESULT:::::::::::" + result.body);
                       if (result.statusCode == 200) {
@@ -155,37 +132,16 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       } else if (result.statusCode == 400) {
-                        print(result.body);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            backgroundColor: Colors.red,
-                            elevation: 8.0,
-                            duration: Duration(seconds: 3),
-                            content: Text('Email et mot de passe requis.'),
-                            action: SnackBarAction(
-                              label: 'Fermer',
-                              textColor: Colors.white,
-                              onPressed: () {
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                              },
-                            ),
-                          ),
-                        );
+                        toast(context, Colors.red,
+                            'Email et mot de passe requis.');
                       }
                     }
                     setState(() {
                       _isLoad = false;
                     });
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          backgroundColor: Colors.red,
-                          elevation: 8.0,
-                          duration: Duration(seconds: 3),
-                          content: Text('Veuillez vérifier vos informations.')),
-                    );
+                    toast(context, Colors.red,
+                        "Veuillez vérifier vos informations.");
                   }
                 })
         ],

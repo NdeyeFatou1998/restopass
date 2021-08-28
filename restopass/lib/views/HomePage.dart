@@ -12,7 +12,7 @@ import 'UserPage.dart';
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   late User user;
-  late Compte compte;
+  late ValueNotifier<Compte> compte;
   HomePage(this.user, this.compte, {Key? key}) : super(key: key);
 
   @override
@@ -69,10 +69,13 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             switch (index) {
               case 0:
-                _currentPage = UserPage(widget.user, widget.compte);
+                _currentPage = UserPage(
+                  widget.user,
+                  widget.compte,
+                );
                 break;
               case 1:
-                _currentPage = TransfertPage(widget.compte);
+                _currentPage = TransfertPage(widget.compte.value);
                 break;
               case 2:
                 _currentPage = transactionPage(context);

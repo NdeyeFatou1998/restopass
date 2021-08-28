@@ -8,7 +8,6 @@ use App\Models\Transfert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
-
 class CompteController extends Controller
 {
 
@@ -79,8 +78,14 @@ class CompteController extends Controller
                 ->first();
         } else {
             $to = Compte::whereAccountNum($request->to)
-                ->orWhereAccountCode($request->to)
+                ->orWhere('account_code',$request->to)
                 ->first();
+        }
+	if ($to == null) {
+            return response()->json([
+                'message' => 'Le compte n\'existe pas.',
+                'code' => 404
+            ], 404);
         }
         if ($from->account_num == $to->account_num) {
             return response()->json([
@@ -89,12 +94,7 @@ class CompteController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($to == null) {
-            return response()->json([
-                'message' => 'Le compte n\'existe pas.',
-                'code' => 404
-            ], 404);
-        }
+        
         if ($from->pay >= $amount) {
             $from->pay -= $amount;
             $from->save();
@@ -133,8 +133,10 @@ class CompteController extends Controller
     {
         return DB::table("transferts as T")
             ->whereFromId(auth()->id())
+		->orWhere('to_id',auth()->id())
             ->join('users as U', 'U.id', 'T.to_id')
-            ->select("T.amount", 'T.created_at as date', 'U.first_name', 'U.last_name')
+            ->select("T.amount", 'T.created_at as date', 'U.first_name', 'U.last_name', 'T.to_id as to_from')
+		->orderBy('T.created_at', 'desc')
             ->get();
     }
 

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:restopass/controllers/Request.dart';
 import 'package:restopass/models/Compte.dart';
+import 'package:restopass/models/RefreshResponse.dart';
 import 'package:restopass/models/User.dart';
 import 'package:restopass/utils/SharedPref.dart';
 import 'package:restopass/utils/Utils.dart';

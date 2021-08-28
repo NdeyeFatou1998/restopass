@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:restopass/models/LoginData.dart';
-import 'package:restopass/models/Response.dart' as api;
+import 'package:restopass/models/LoginResponse.dart';
+import 'package:restopass/models/RefreshResponse.dart';
+import 'package:restopass/models/Response.dart';
 import 'package:restopass/models/Tranfer.dart';
+import 'package:restopass/models/User.dart';
 import 'package:restopass/utils/SharedPref.dart';
 import 'package:restopass/utils/Utils.dart';
 
@@ -64,10 +68,54 @@ abstract class Request {
     late List<Transfert>? apiResponse;
 
     http.Response response = await client.get(uri, headers: hdrs);
-    print(response.statusCode);
+    log(response.body);
     if (response.statusCode == 200) {
-      print(response.body);
       apiResponse = tranfertsFromJson(response.body);
+    } else
+      apiResponse = null;
+    return apiResponse;
+  }
+
+  static Future<Response?> transfert(String? to, int? amount) async {
+    var uri = Uri.parse(API + '/etudiant/transfert');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    var client = new http.Client();
+
+    http.Response response = await client.post(uri,
+        body: json.encode({'to': to, 'amount': amount}), headers: hdrs);
+    print(response.body);
+    return responseFromJson(response.body);
+  }
+
+  static Future<RefreshResponse?> getUser() async {
+    var uri = Uri.parse(API + '/etudiant');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    var client = new http.Client();
+    late RefreshResponse? apiResponse;
+
+    http.Response response = await client.get(uri, headers: hdrs);
+    if (response.statusCode == 200) {
+      apiResponse = refreshResponseFromJson(response.body);
     } else
       apiResponse = null;
     return apiResponse;

@@ -133,8 +133,8 @@ class _CodePinPageState extends State<CodePinPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(widget.user, widget.compte)));
+                        builder: (context) => HomePage(widget.user,
+                            ValueNotifier<Compte>(widget.compte))));
                 break;
               case 500:
                 print(result.body);
