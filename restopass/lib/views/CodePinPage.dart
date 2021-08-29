@@ -118,7 +118,6 @@ class _CodePinPageState extends State<CodePinPage> {
         animationDuration: Duration(milliseconds: 300),
         enableActiveFill: true,
         onCompleted: (v) async {
-          print("Completed $v");
           setState(() {
             _isLoad = true;
           });
@@ -126,7 +125,6 @@ class _CodePinPageState extends State<CodePinPage> {
           if (result == null)
             print("TOKEN NULL");
           else {
-            print("CREATE PIN !!!!!!!!!!!!!!!!!!!! " + result.body);
             switch (result.statusCode) {
               case 200:
                 await SharedPref.setPin(v);

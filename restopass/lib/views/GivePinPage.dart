@@ -125,10 +125,8 @@ class _GivePinPageState extends State<GivePinPage> {
         animationDuration: Duration(milliseconds: 300),
         enableActiveFill: true,
         onCompleted: (v) async {
-          print("Completed $v");
           setState(() => _isLoad = true);
           String? code = await SharedPref.getPin();
-          print("CODE LOCAL: $code, IN: $v");
           if (code == null) {
             logOut(context);
           } else if (code == v) {

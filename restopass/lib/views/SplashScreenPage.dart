@@ -27,8 +27,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       User? user = await isLogin();
       Compte? compte = await SharedPref.getCompte();
       String? pin = await SharedPref.getPin();
-      print("USER::::::::" + user.toString());
-      print("COMPTE::::::::" + compte.toString());
       if (user == null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => LoginPage()));

@@ -47,7 +47,6 @@ class _UserPageState extends State<UserPage> {
         await SharedPref.setCompte(value.compte);
         if (this.mounted)
           setState(() {
-            print("MOUNTED");
             _user = value.user;
             _compte = value.compte;
             widget.compte.value = value.compte;
@@ -133,29 +132,6 @@ class _UserPageState extends State<UserPage> {
               ),
             ],
           ),
-          // FutureBuilder(
-          //   future: Request.getUser(),
-          //   builder: (context, AsyncSnapshot<RefreshResponse?> snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return Container(
-          //         margin: EdgeInsets.only(top: 30),
-          //         child: spinner(PRIMARY_COLOR, 50),
-          //       );
-          //     } else if (snapshot.connectionState == ConnectionState.done) {
-          //       if (snapshot.hasError) {
-          //         return Container();
-          //       } else if (snapshot.hasData) {
-          //         widget.user = snapshot.data!.user;
-          //         widget.compte = snapshot.data!.compte;
-          //         return Container();
-          //       } else {
-          //         return logOut(context);
-          //       }
-          //     } else {
-          //       return Text('State: ${snapshot.connectionState}');
-          //     }
-          //   },
-          // ),
           Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: 15),

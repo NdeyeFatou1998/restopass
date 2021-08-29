@@ -9,9 +9,10 @@ import 'package:restopass/models/Compte.dart';
 import 'package:restopass/models/Response.dart';
 import 'package:restopass/models/Tranfer.dart';
 import 'package:restopass/utils/SharedPref.dart';
+import 'package:restopass/utils/TransfertCardItem.dart';
 import 'package:restopass/utils/Utils.dart';
 import 'package:restopass/utils/Widget.dart';
-import 'package:restopass/utils/card_item.dart';
+import 'package:restopass/utils/PaymentCardItem.dart';
 
 class TransfertPage extends StatefulWidget {
   Compte compte;
@@ -181,7 +182,6 @@ class _TransfertPageState extends State<TransfertPage> {
                       });
 
                   if (conf == true) {
-                    print("FAIRE UN TRANSFERT de $_amount A $_to");
                     showLoaderDialog(context);
                     Response? result = await Request.transfert(_to, _amount);
                     Navigator.pop(context);
@@ -292,7 +292,6 @@ class _TransfertPageState extends State<TransfertPage> {
                 child: spinner(PRIMARY_COLOR, 50),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              print(snapshot);
               if (snapshot.hasError) {
                 return _errorWidget(context);
               } else if (snapshot.hasData) {

@@ -44,6 +44,8 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
 
     Route::post('transfert', [CompteController::class, 'transfert']);
     Route::get('transfert', [CompteController::class, 'transferts']);
+
+    Route::get('/payments', [RestoController::class, 'userPayments']);
 });
 
 

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:restopass/models/LoginData.dart';
 import 'package:restopass/models/LoginResponse.dart';
+import 'package:restopass/models/Payment.dart';
 import 'package:restopass/models/RefreshResponse.dart';
 import 'package:restopass/models/Response.dart';
 import 'package:restopass/models/Tranfer.dart';
@@ -68,7 +69,6 @@ abstract class Request {
     late List<Transfert>? apiResponse;
 
     http.Response response = await client.get(uri, headers: hdrs);
-    log(response.body);
     if (response.statusCode == 200) {
       apiResponse = tranfertsFromJson(response.body);
     } else
@@ -93,7 +93,6 @@ abstract class Request {
 
     http.Response response = await client.post(uri,
         body: json.encode({'to': to, 'amount': amount}), headers: hdrs);
-    print(response.body);
     return responseFromJson(response.body);
   }
 
@@ -119,5 +118,26 @@ abstract class Request {
     } else
       apiResponse = null;
     return apiResponse;
+  }
+
+  static Future<List<Payment>?> getPayments() async {
+    var uri = Uri.parse(API + '/etudiant/payments');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    var client = new http.Client();
+    http.Response response = await client.get(uri, headers: hdrs);
+    if (response.statusCode == 200) {
+      return payementsFromJson(response.body);
+    } else
+      return null;
   }
 }

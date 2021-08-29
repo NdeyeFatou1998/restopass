@@ -90,7 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                       toast(context, Colors.red,
                           "Impossible de se connecter au serveur.");
                     } else {
-                      log("RESULT:::::::::::" + result.body);
                       if (result.statusCode == 200) {
                         LoginResponse res = loginResponseFromJson(result.body);
                         await SharedPref.saveUser(res.user);
