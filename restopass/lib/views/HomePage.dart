@@ -4,6 +4,7 @@ import 'package:restopass/models/Compte.dart';
 import 'package:restopass/models/User.dart';
 import 'package:restopass/utils/Utils.dart';
 import 'package:restopass/views/RechargementPage.dart';
+import 'package:restopass/views/SettingsPage.dart';
 import 'package:restopass/views/TransactionPage.dart';
 import 'package:restopass/views/TransfertPage.dart';
 
@@ -64,6 +65,7 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.send_rounded, color: Colors.white, size: 30),
           Icon(Icons.list, color: Colors.white, size: 30),
           Icon(Icons.payment_rounded, color: Colors.white, size: 30),
+          Icon(Icons.settings, color: Colors.white, size: 30),
         ],
         onTap: (index) {
           setState(() {
@@ -82,6 +84,9 @@ class _HomePageState extends State<HomePage> {
                 break;
               case 3:
                 _currentPage = rechargementPage(context);
+                break;
+              case 4:
+                _currentPage = SettingsPage(widget.user, widget.compte.value);
                 break;
               default:
                 print("ERRORRRRRRRRRR");

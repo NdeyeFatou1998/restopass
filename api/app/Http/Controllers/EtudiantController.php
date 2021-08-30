@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Compte;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ResetPinMailler;
+use App\Mail\ResetPWDMailler;
+use App\Models\ResetPassword;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class EtudiantController extends Controller
@@ -124,6 +130,121 @@ class EtudiantController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * Modifier son mot de passe,
+     * @required auth
+     */
+    public function editPassword(Request $request)
+    {
+        $this->validate($request, [
+            'old_password' => 'required|string',
+            'new_password' => 'required|min:6'
+        ]);
+
+        $user = User::find(auth()->id());
+
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return response()->json([
+                'message' => 'Mot de passe modifier avec succès.',
+                'code' => 200
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Mot de passe incorrecte.',
+                'code' => 404
+            ], 404);
+        }
+    }
+
+    /**
+     * Mot de passe oublié.
+     */
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string|email|exists:users,email',
+        ]);
+
+        $user = User::whereEmail($request->email)->first();
+        $code = Str::upper(Str::random(6));
+        ResetPassword::create([
+            'email' => $user->email,
+            'code' => $code
+        ]);
+
+        try {
+            Mail::to($user->email)->send(new ResetPWDMailler($user, $code));
+            return response()->json([
+                'message' => 'Un mail vous a été envoyé. Utiliser le code pour réinitialiser votre mot de passe.',
+                'code' => 200
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Une erreur s\'est produit. Merci de réessayer plus tard.',
+                'code' => 500
+            ], 500);
+        }
+    }
+
+    /**
+     * Create a new password
+     */
+    public function newPassword(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|exists:users,email',
+            'password' => 'required|string|min:6',
+            'code' => 'required|exists:reset_passwords,code'
+        ]);
+
+        $code = ResetPassword::where('email', $request->email)
+            ->where('code', $request->code)
+            ->first();
+        if ($code == null) {
+            return response()->json([
+                'message' => 'Email ou code invalide.',
+                'code' => 404
+            ], 404);
+        } else {
+            $user = User::whereEmail($request->email)->first();
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            DB::table('reset_passwords')->whereEmail($request->email)->delete();
+            return response()->json([
+                'message' => 'Mot de passe modifier avec succès.',
+                'code' => 200
+            ], 200);
+        }
+    }
+
+    /**
+     * Reçevoir son code pin par Email
+     */
+    public function resetPin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string|email|exists:users,email',
+        ]);
+
+        $user = User::whereEmail($request->email)->first();
+
+        try {
+            Mail::to($user->email)->send(new ResetPinMailler($user, Compte::whereUserId($user->id)->first()->pin));
+            return response()->json([
+                'message' => 'Un mail vous a été envoyé.',
+                'code' => 200
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Une erreur s\'est produit. Merci de réessayer plus tard.',
+                'code' => 500
+            ], 500);
+        }
     }
 
     /**

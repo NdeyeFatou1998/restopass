@@ -46,6 +46,13 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
     Route::get('transfert', [CompteController::class, 'transferts']);
 
     Route::get('/payments', [RestoController::class, 'userPayments']);
+
+    Route::post('/edit-password', [EtudiantController::class, 'editPassword']);
+    Route::post('/reset-pin', [EtudiantController::class, 'resetPin']);
+
+    Route::post('/reset-password', [EtudiantController::class, 'resetPassword']);
+    Route::post('/new-password', [EtudiantController::class, 'newPassword']);
+
 });
 
 
