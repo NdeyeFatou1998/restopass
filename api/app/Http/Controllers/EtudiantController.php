@@ -171,13 +171,13 @@ class EtudiantController extends Controller
 
         $user = User::whereEmail($request->email)->first();
         $code = Str::upper(Str::random(6));
-        ResetPassword::create([
-            'email' => $user->email,
-            'code' => $code
-        ]);
 
         try {
             Mail::to($user->email)->send(new ResetPWDMailler($user, $code));
+            $resetPassword = new ResetPassword();
+            $resetPassword->email = $user->email;
+            $resetPassword->code = $code;
+            $resetPassword->save();
             return response()->json([
                 'message' => 'Un mail vous a été envoyé. Utiliser le code pour réinitialiser votre mot de passe.',
                 'code' => 200
@@ -214,38 +214,19 @@ class EtudiantController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            DB::table('reset_passwords')->whereEmail($request->email)->delete();
-            return response()->json([
-                'message' => 'Mot de passe modifier avec succès.',
-                'code' => 200
-            ], 200);
+			DB::table("reset_passwords")->whereEmail($user->email)->delete();
+
+            $token = $user->createToken('User Password Grant Client')->accessToken;
+            $response = [
+                'token' => $token,
+                'user' => $user,
+                'compte' => Compte::whereUserId($user->id)->first()
+            ];
+            return response($response, 200);
         }
     }
 
-    /**
-     * Reçevoir son code pin par Email
-     */
-    public function resetPin(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|string|email|exists:users,email',
-        ]);
-
-        $user = User::whereEmail($request->email)->first();
-
-        try {
-            Mail::to($user->email)->send(new ResetPinMailler($user, Compte::whereUserId($user->id)->first()->pin));
-            return response()->json([
-                'message' => 'Un mail vous a été envoyé.',
-                'code' => 200
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Une erreur s\'est produit. Merci de réessayer plus tard.',
-                'code' => 500
-            ], 500);
-        }
-    }
+    
 
     /**
      * Remove the specified resource from storage.

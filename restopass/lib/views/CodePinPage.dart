@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:restopass/controllers/Request.dart';
 import 'package:restopass/models/Compte.dart';
@@ -99,6 +100,10 @@ class _CodePinPageState extends State<CodePinPage> {
         cursorColor: PRIMARY_COLOR,
         keyboardAppearance: Brightness.light,
         autovalidateMode: AutovalidateMode.always,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          MaskTextInputFormatter(mask: '####', filter: {"#": RegExp(r'[0-9]')})
+        ],
         backgroundColor: Colors.white,
         autoFocus: true,
         textStyle: TextStyle(color: PRIMARY_COLOR, fontFamily: "Poppins Light"),

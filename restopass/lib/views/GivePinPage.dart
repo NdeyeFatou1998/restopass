@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:restopass/controllers/Request.dart';
 import 'package:restopass/models/Compte.dart';
@@ -8,6 +11,7 @@ import 'package:restopass/utils/Utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:restopass/utils/Widget.dart';
 import 'package:restopass/views/HomePage.dart';
+import 'package:restopass/views/ResetPinPage.dart';
 
 class GivePinPage extends StatefulWidget {
   late User user;
@@ -36,12 +40,12 @@ class _GivePinPageState extends State<GivePinPage> {
               topPart(context),
               SizedBox(height: 50),
               pinPart(context),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
               _isLoad == true
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        spinner(PRIMARY_COLOR, 50),
+                        spinner(PRIMARY_COLOR, 40),
                         Text("Traitement en cours...",
                             style: TextStyle(
                                 color: Colors.black,
@@ -50,11 +54,16 @@ class _GivePinPageState extends State<GivePinPage> {
                     )
                   : Container(
                       child: TextButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResetPinPage()));
+                      },
                       child: Text("Code d'accès oublié?",
                           style: TextStyle(
-                              color: PRIMARY_COLOR,
-                              decoration: TextDecoration.underline)),
+                            color: PRIMARY_COLOR,
+                          )),
                     )),
             ],
           ),
@@ -105,6 +114,10 @@ class _GivePinPageState extends State<GivePinPage> {
         appContext: context,
         cursorColor: PRIMARY_COLOR,
         keyboardAppearance: Brightness.light,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          MaskTextInputFormatter(mask: '####', filter: {"#": RegExp(r'[0-9]')})
+        ],
         autovalidateMode: AutovalidateMode.always,
         backgroundColor: Colors.white,
         autoFocus: true,
@@ -127,6 +140,7 @@ class _GivePinPageState extends State<GivePinPage> {
         onCompleted: (v) async {
           setState(() => _isLoad = true);
           String? code = await SharedPref.getPin();
+          log("LOCAL CODE $code", name: "GIVE PIN CODE");
           if (code == null) {
             logOut(context);
           } else if (code == v) {
@@ -136,22 +150,7 @@ class _GivePinPageState extends State<GivePinPage> {
                     builder: (context) => HomePage(
                         widget.user, ValueNotifier<Compte>(widget.compte))));
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.redAccent,
-                elevation: 8.0,
-                duration: Duration(seconds: 5),
-                content: Text('Code d\'accès incorrect.'),
-                action: SnackBarAction(
-                  label: 'Fermer',
-                  textColor: Colors.white,
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  },
-                ),
-              ),
-            );
+            toast(context, Colors.red, 'Code d\'accès incorrect.');
           }
           setState(() => _isLoad = false);
         },

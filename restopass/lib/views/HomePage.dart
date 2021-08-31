@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:restopass/models/Compte.dart';
@@ -42,13 +44,25 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context) {
             return IconButton(
               icon: const Icon(Icons.menu_open_rounded),
-              onPressed: () {},
+              onPressed: () async {},
             );
           },
         ),
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () async {
+                bool? conf = await confDialog(context,
+                    title: "Déconnexion",
+                    message: "Voulez-vous vous déconnectez?");
+                if (conf != null && conf == true) {
+                  logOut(context);
+                }
+              })
+        ],
         title: Text(APP_NAME,
             style: TextStyle(
                 color: Colors.white,

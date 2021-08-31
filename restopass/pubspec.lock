@@ -50,20 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  currency_text_input_formatter:
-    dependency: "direct main"
-    description:
-      name: currency_text_input_formatter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.2"
-  currency_textfield:
-    dependency: "direct main"
-    description:
-      name: currency_textfield
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   curved_navigation_bar:
     dependency: "direct main"
     description:
@@ -97,13 +83,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_neumorphic:
-    dependency: "direct main"
-    description:
-      name: flutter_neumorphic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -142,13 +121,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  mask_input_formatter:
+  mask_text_input_formatter:
     dependency: "direct main"
     description:
-      name: mask_input_formatter
+      name: mask_text_input_formatter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "2.0.0"
   matcher:
     dependency: transitive
     description:
@@ -156,13 +135,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.10"
-  material_segmented_control:
-    dependency: "direct main"
-    description:
-      name: material_segmented_control
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.2"
   meta:
     dependency: transitive
     description:

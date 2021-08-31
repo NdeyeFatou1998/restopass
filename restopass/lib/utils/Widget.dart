@@ -17,3 +17,19 @@ Widget spinner(Color color, double size) {
         )),
   );
 }
+
+Widget submitButton(String text, {required void Function()? onPressed}) {
+  return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white),
+        ),
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(10),
+            backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR)),
+      ));
+}

@@ -1,9 +1,8 @@
 import 'dart:developer';
 
-import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_input_formatter/mask_input_formatter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:restopass/controllers/Request.dart';
 import 'package:restopass/models/Compte.dart';
 import 'package:restopass/models/Response.dart';
@@ -23,8 +22,6 @@ class TransfertPage extends StatefulWidget {
 }
 
 class _TransfertPageState extends State<TransfertPage> {
-  final CurrencyTextFieldController _controller = CurrencyTextFieldController();
-
   late String _to;
   int? _amount;
 
@@ -79,10 +76,11 @@ class _TransfertPageState extends State<TransfertPage> {
               padding: EdgeInsets.only(right: 10),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                inputFormatters: [
-                  MaskInputFormatter(mask: '###########', textAllCaps: true)
-                ],
                 style: TextStyle(color: Colors.black87),
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                      mask: '###########', filter: {"#": RegExp(r'[0-9]')})
+                ],
                 cursorColor: PRIMARY_COLOR,
                 decoration: InputDecoration(
                   border: InputBorder.none,

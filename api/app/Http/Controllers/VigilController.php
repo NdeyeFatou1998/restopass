@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use Exception;
+use App\Models\User;
+use App\Models\Resto;
 use App\Models\Tarif;
 use App\Models\Vigil;
 use App\Models\Compte;
 use App\Models\Payement;
-use App\Utils\Constante as C;
 use Illuminate\Http\Request;
+use App\Utils\Constante as C;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,7 +20,7 @@ class VigilController extends Controller
     private const PREFIX_EMAIL = "resto.vigil";
     private const SUFFIX_MAIL = "@restopass.sn";
     private const BASE_MATRICULE = "restopass.vigil";
-
+    private const DATE_FORMAT = "o-m-d G:m:s";
 
     public function __construct()
     {
@@ -123,25 +125,41 @@ class VigilController extends Controller
             ->first();
         if ($compte == null) {
             return response()->json([
-                'message' => 'Votre carte est invalide.' ,
+                'message' => 'Votre carte est invalide.',
                 'code' => 404
             ], 404);
         }
 
-        if ($compte->pay >= $tarif->price) {
+        $scanner = new Payement();
+        $scanner->amount = $tarif->price;
+        $scanner->date_time = new DateTime();
+        $scanner->resto_id = auth()->user()->resto_id;
+        $scanner->vigil_id = auth()->user()->id;
+        $scanner->user_id = $compte->user_id;
+        $scanner->tarif_id = $tarif->id;
+
+        if ($this->isPassed($compte)) {
+            return response()->json([
+                'message' => 'Impossible de passer plus d\'une fois pour le même repas.',
+                'code' => 400
+            ], 400);
+        } else if ($this->sansTicket(auth()->user()->resto_id)) {
+            $scanner->is_free = true;
+            $scanner->save();
+
+            return response()->json([
+                'message' => 'Contrôler avec succès.' . $tarif->price . ' FCFA',
+                'code' => 200
+            ], 200);
+        } else if ($compte->pay >= $tarif->price) {
             $compte->pay -= $tarif->price;
             $compte->save();
 
-            $scanner = new Payement();
-            $scanner->amount = $tarif->price;
-            $scanner->date_time = new DateTime();
-            $scanner->resto_id = auth()->user()->resto_id;
-            $scanner->vigil_id = auth()->user()->id;
-            $scanner->user_id = $compte->user_id;
-            $scanner->tarif_id = $tarif->id;
             $scanner->save();
-
-            return response()->json(['message' => 'Contrôler avec succès.' . $tarif->price . ' FCFA', 'code' => 200], 200);
+            return response()->json([
+                'message' => 'Contrôler avec succès.' . $tarif->price . ' FCFA',
+                'code' => 200
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Votre solde est insuffisant.',
@@ -165,5 +183,54 @@ class VigilController extends Controller
             'message' => 'Affectation succès.',
             'code' => 200
         ], 200);
+    }
+
+    /**
+     * Vérifier si l'étudiant est deja passé pour ce repas.
+     */
+    private function isPassed(Compte $compte): bool
+    {
+        $date = DB::select("select date_time from payements where user_id = ? order by date_time desc limit 1", [$compte->user_id]);
+        if (count($date) === 0)
+            return false;
+        $date = $date[0]->date_time;
+        $current_date = date(self::DATE_FORMAT);
+
+        $diff = date_diff(new DateTime($current_date), new DateTime($date));
+
+        if ($diff->y === 0 && $diff->m === 0 && $diff->d === 0) {
+            $current_h = date_parse($current_date)['hour'];
+            $last_h = date_parse($date)['hour'];
+            return $this->checkInterval($last_h, $current_h);
+        }
+
+        return false;
+    }
+
+    private function checkInterval($date1, $date2): bool
+    {
+        $res = false;
+        $horaires = DB::table('horaires')->get();
+
+        foreach ($horaires as $h) {
+            $now = date(now());
+            $open = date_parse($now)['hour'];
+            dd($now, $open);
+            $close = date_parse($h->close)['hour'];
+            if (($open <= $date1 && $date1 <= $close)
+                && ($open <= $date2 && $date2 <= $close)
+            ) {
+                $res = true;
+                break;
+            }
+        }
+
+        return $res;
+    }
+
+
+    private function sansTicket($id)
+    {
+        return Resto::find($id)->is_free;
     }
 }

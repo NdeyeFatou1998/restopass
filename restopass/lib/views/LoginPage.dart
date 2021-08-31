@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:restopass/controllers/Request.dart';
 import 'package:restopass/models/LoginData.dart';
@@ -10,7 +8,7 @@ import 'package:restopass/utils/Widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:restopass/views/CodePinPage.dart';
 import 'package:restopass/views/GivePinPage.dart';
-import 'package:restopass/views/HomePage.dart';
+import 'package:restopass/views/ResetPasswordPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -74,13 +72,16 @@ class _LoginPageState extends State<LoginPage> {
             child: passwordField(),
           ),
           SizedBox(height: 20),
-          forgetPassword(onTap: () {}),
+          forgetPassword(onPressed: () async {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ResetPasswordPage()));
+          }),
           SizedBox(height: 10),
           _isLoad
               ? Container(
                   alignment: Alignment.center,
                   child: spinner(PRIMARY_COLOR, 30))
-              : submitButton(onPressed: () async {
+              : submitButton("Se connecter", onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() {
                       _isLoad = true;
@@ -91,26 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           "Impossible de se connecter au serveur.");
                     } else {
                       if (result.statusCode == 200) {
-                        LoginResponse res = loginResponseFromJson(result.body);
-                        await SharedPref.saveUser(res.user);
-                        await SharedPref.setCompte(res.compte);
-                        await SharedPref.setToken(res.token);
-                        if (res.compte.pin == null) {
-                          // creer un nouveau pin
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      CodePinPage(res.user, res.compte)));
-                        } else if (res.compte.pin != null) {
-                          // donner son pin
-                          await SharedPref.setPin(res.compte.pin ?? '');
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      GivePinPage(res.user, res.compte)));
-                        }
+                        afterAuth(result, context);
                       } else if (result.statusCode == 422) {
                         print(result.body);
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -222,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
               if (value == null || value.isEmpty) {
                 return 'Donner votre email';
               }
-              if (!_isMail(value)) {
+              if (!isMail(value)) {
                 return 'Adresse email invalide.';
               }
               return null;
@@ -231,12 +213,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ],
     );
-  }
-
-  bool _isMail(String str) {
-    return RegExp(
-            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-        .hasMatch(str);
   }
 
   Widget passwordField() {
@@ -287,30 +263,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget forgetPassword({required Function onTap}) {
+  Widget forgetPassword({required void Function()? onPressed}) {
     return Container(
         padding: EdgeInsets.only(right: 30),
         alignment: Alignment.centerRight,
         child: TextButton(
-            onPressed: onTap(),
+            onPressed: onPressed,
             child: Text("Mot de passe oublié?",
                 style: TextStyle(
                     color: PRIMARY_COLOR, fontFamily: "Poppins Light"))));
-  }
-
-  Widget submitButton({required void Function()? onPressed}) {
-    return Container(
-        width: double.infinity,
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text(
-            "Se connecter",
-            style: TextStyle(color: Colors.white),
-          ),
-          style: ButtonStyle(
-              elevation: MaterialStateProperty.all(10),
-              backgroundColor: MaterialStateProperty.all(PRIMARY_COLOR)),
-        ));
   }
 }

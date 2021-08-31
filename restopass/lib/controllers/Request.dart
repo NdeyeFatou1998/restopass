@@ -140,4 +140,39 @@ abstract class Request {
     } else
       return null;
   }
+
+  static Future<http.Response> resetPassword(String email) async {
+    var uri = Uri.parse(API + '/etudiant/reset-password');
+
+    var client = new http.Client();
+
+    http.Response response = await client.post(uri,
+        body: json.encode({'email': email}), headers: headers);
+    log(response.body, name: "RESET PASSWORD");
+    return response;
+  }
+
+  static Future<http.Response> resetPin(String email) async {
+    var uri = Uri.parse(API + '/etudiant/reset-pin');
+
+    var client = new http.Client();
+
+    http.Response response = await client.post(uri,
+        body: json.encode({'email': email}), headers: headers);
+    log(response.body, name: "RESET PIN");
+    return response;
+  }
+
+  static Future<http.Response> newPassword(
+      String email, String code, String password) async {
+    var uri = Uri.parse(API + '/etudiant/new-password');
+
+    var client = new http.Client();
+
+    http.Response response = await client.post(uri,
+        body: json.encode({'email': email, 'code': code, 'password': password}),
+        headers: headers);
+    log(response.body, name: "NEW PASSWORD");
+    return response;
+  }
 }

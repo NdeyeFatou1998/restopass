@@ -48,15 +48,13 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
     Route::get('/payments', [RestoController::class, 'userPayments']);
 
     Route::post('/edit-password', [EtudiantController::class, 'editPassword']);
-    Route::post('/reset-pin', [EtudiantController::class, 'resetPin']);
+    Route::post('/reset-pin', [CompteController::class, 'resetPin'])->withoutMiddleware('auth:api');
 
-    Route::post('/reset-password', [EtudiantController::class, 'resetPassword']);
-    Route::post('/new-password', [EtudiantController::class, 'newPassword']);
+	// demande de réinitialisation de mot de passe
+    Route::post('/reset-password', [EtudiantController::class, 'resetPassword'])->withoutMiddleware('auth:api');
+    Route::post('/new-password', [EtudiantController::class, 'newPassword'])->withoutMiddleware('auth:api');
 
 });
-
-
-
 
 Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
     Route::post('/register', [VigilController::class, 'store'])->withoutMiddleware('auth:controller');
@@ -68,11 +66,3 @@ Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
 });
 
 Route::get('tarifs',  [RestoController::class, 'tarifs'])->middleware(['auth:controller']);
-
-
-
-
-
-Route::post("/", function(Request $request){
-    return $request;
-});

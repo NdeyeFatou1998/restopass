@@ -8,7 +8,9 @@ use App\Models\Transfert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPinMailler;
+use App\Models\ResetPassword;
 class CompteController extends Controller
 {
 
@@ -124,6 +126,31 @@ class CompteController extends Controller
                 'message' => 'Le solde de votre compte est insuffisant.',
                 'code' => 422
             ], 422);
+        }
+    }
+
+/**
+     * Reçevoir son code pin par Email
+     */
+    public function resetPin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|string|email|exists:users,email',
+        ]);
+
+        $user = User::whereEmail($request->email)->first();
+
+        try {
+            Mail::to($user->email)->send(new ResetPinMailler($user, Compte::whereUserId($user->id)->first()->pin));
+            return response()->json([
+                'message' => 'Un mail vous a été envoyé.',
+                'code' => 200
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Une erreur s\'est produit. Merci de réessayer plus tard.',
+                'code' => 500
+            ], 500);
         }
     }
 
