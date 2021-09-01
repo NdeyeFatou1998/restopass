@@ -15,18 +15,22 @@ Captures d'écran:
 Captures d'écran:
 
 - Page de connexion
+- Création d'un nouveau code pin
 - Page de Demande de code pin
 
-![et_app_login](https://user-images.githubusercontent.com/58815209/131547984-ca9d2743-e96e-400e-b670-c3265df3bc5a.png)
+![auths_page](https://user-images.githubusercontent.com/58815209/131711739-e32a4c96-af56-4989-abc1-73b8f74cefdf.png)
 
 - Page Profile utilisateur
 - Page de Transfert d'argent
 - Page pour la liste de visites aux restos
+- Page de configuration
 
-![home_page](https://user-images.githubusercontent.com/58815209/131548743-ada84764-1cd9-4add-99bc-138e35564264.png)
+![home_page](https://user-images.githubusercontent.com/58815209/131711847-caaaa667-6865-4a9b-bb2c-f2ddfa545a58.png)
 
 - Page de réinitialisation de mot de passe
 - Page de définition d'un nouveau mot de passe
 
-![pass_ouboie](https://user-images.githubusercontent.com/58815209/131549350-ae819001-a76d-4048-be7d-b4913ed40e02.png)
+![reset_pass](https://user-images.githubusercontent.com/58815209/131712128-b930d6a2-0f27-4947-8b41-6a84456c13f9.png)
+
+
 
