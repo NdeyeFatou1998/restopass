@@ -17,9 +17,16 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
+  late String name;
+
   @override
   Widget build(BuildContext context) {
-    bool mode = widget.user != widget.transfer.toOrFrom;
+    bool isFromMe = widget.user != widget.transfer.toOrFrom;
+    if (isFromMe == false) {
+      name = widget.transfer.fromFirstName + " " + widget.transfer.fromLastName;
+    } else {
+      name = widget.transfer.toFirstName + " " + widget.transfer.toLastName;
+    }
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: 5, left: 5, right: 5),
@@ -33,9 +40,9 @@ class _CardItemState extends State<CardItem> {
               Row(
                 children: [
                   Icon(
-                    mode ? Icons.call_made : Icons.call_received_sharp,
+                    isFromMe ? Icons.call_made : Icons.call_received_sharp,
                     size: 20,
-                    color: mode ? Colors.red : Colors.green,
+                    color: isFromMe ? Colors.red : Colors.green,
                   ),
                   SizedBox(
                     width: 10,
@@ -45,9 +52,7 @@ class _CardItemState extends State<CardItem> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.transfer.firstName +
-                            " " +
-                            widget.transfer.lastName,
+                        name,
                         style: TextStyle(
                           fontFamily: "Poppins Light",
                           fontSize: 15,
@@ -77,7 +82,7 @@ class _CardItemState extends State<CardItem> {
                       fontSize: 15,
                       fontFamily: "Poppins Light",
                       fontWeight: FontWeight.bold,
-                      color: mode ? Colors.red : Colors.green),
+                      color: isFromMe ? Colors.red : Colors.green),
                 ),
               )
             ],

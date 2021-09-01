@@ -48,6 +48,7 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
     Route::get('/payments', [RestoController::class, 'userPayments']);
 
     Route::post('/edit-password', [EtudiantController::class, 'editPassword']);
+	Route::post('/edit-pin', [CompteController::class, 'editPin']);
     Route::post('/reset-pin', [CompteController::class, 'resetPin'])->withoutMiddleware('auth:api');
 
 	// demande de réinitialisation de mot de passe

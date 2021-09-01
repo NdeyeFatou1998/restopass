@@ -20,6 +20,7 @@ dependencies:
   money_formatter: ^0.0.3
   pretty_qr_code: ^2.0.2
   mask_text_input_formatter: ^2.0.0
+  url_launcher: ^6.0.9
 
 dev_dependencies:
   flutter_test:

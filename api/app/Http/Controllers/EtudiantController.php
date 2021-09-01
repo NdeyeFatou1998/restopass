@@ -155,8 +155,8 @@ class EtudiantController extends Controller
         } else {
             return response()->json([
                 'message' => 'Mot de passe incorrecte.',
-                'code' => 404
-            ], 404);
+                'code' => 400
+            ], 400);
         }
     }
 

@@ -140,7 +140,7 @@ class _GivePinPageState extends State<GivePinPage> {
         onCompleted: (v) async {
           setState(() => _isLoad = true);
           String? code = await SharedPref.getPin();
-          log("LOCAL CODE $code", name: "GIVE PIN CODE");
+          log("LOCAL CODE $code, IN $v", name: "GIVE PIN CODE");
           if (code == null) {
             logOut(context);
           } else if (code == v) {

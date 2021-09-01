@@ -9,12 +9,16 @@ class Transfert {
   Transfert(
       {required this.amount,
       required this.date,
-      required this.firstName,
-      required this.lastName,
+      required this.toFirstName,
+      required this.toLastName,
+      required this.fromFirstName,
+      required this.fromLastName,
       required this.toOrFrom});
 
-  String firstName;
-  String lastName;
+  String toFirstName;
+  String toLastName;
+  String fromFirstName;
+  String fromLastName;
   String date;
   int amount;
   int toOrFrom;
@@ -22,8 +26,10 @@ class Transfert {
   factory Transfert.fromJson(Map<String, dynamic> json) => Transfert(
         amount: json["amount"],
         date: json["date"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
+        toFirstName: json["to_first_name"],
+        toLastName: json["to_last_name"],
+        fromFirstName: json["from_first_name"],
+        fromLastName: json["from_last_name"],
         toOrFrom: json["to_from"],
       );
 
@@ -36,7 +42,7 @@ class Transfert {
         date +
         "\n" +
         "TO : " +
-        firstName +
-        " $lastName , TO OR FROM: $toOrFrom\n";
+        toFirstName +
+        " $toLastName , TO OR FROM: $toOrFrom\n";
   }
 }

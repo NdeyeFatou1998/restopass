@@ -12,6 +12,9 @@ export class RestoListComponent implements OnInit {
   isLoad: boolean = true;
   selectedResto: Resto;
   cloneResto: Resto;
+  first = 0;
+
+  rows = 10;
   constructor(private restoService: RestosService) {}
 
   ngOnInit(): void {
@@ -30,5 +33,27 @@ export class RestoListComponent implements OnInit {
         this.isLoad = false;
       },
     });
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+    this.first = this.first - this.rows;
+  }
+
+  reset() {
+    this.first = 0;
+  }
+
+  isLastPage(): boolean {
+    return this.restos
+      ? this.first === this.restos.length - this.rows
+      : true;
+  }
+
+  isFirstPage(): boolean {
+    return this.restos ? this.first === 0 : true;
   }
 }

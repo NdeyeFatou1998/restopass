@@ -154,6 +154,29 @@ class CompteController extends Controller
         }
     }
 
+	public function editPin(Request $request){
+
+	 $this->validate($request, [
+            'old_pin' => 'required|min:4|max:4',
+            'new_pin' => 'required|min:4|max:4'
+        ]);
+		$compte = Compte::whereUserId(auth()->id())->first();
+		if($request->old_pin == $compte->pin){
+			$compte->pin = $request->new_pin;
+			$compte->save();
+			return response()->json([
+                'message' => 'Code pin modifier avec succès.',
+                'code' => 200
+            ], 200);
+		}
+		else{
+			return response()->json([
+                'message' => 'Code pin actuel est incorrecte.',
+                'code' => 400
+            ], 400);
+		}
+	}
+
     /**
      * Voir la liste de envoies
      */
@@ -163,7 +186,8 @@ class CompteController extends Controller
             ->whereFromId(auth()->id())
             ->orWhere('to_id', auth()->id())
             ->join('users as U', 'U.id', 'T.to_id')
-            ->select("T.amount", 'T.created_at as date', 'U.first_name', 'U.last_name', 'T.to_id as to_from')
+			->join('users as UF', 'UF.id', 'T.from_id')
+            ->select("T.amount", 'T.created_at as date', 'U.first_name as to_first_name', 'U.last_name as to_last_name','UF.first_name as from_first_name', 'UF.last_name as from_last_name', 'T.to_id as to_from')
             ->orderBy('T.created_at', 'desc')
             ->get();
     }

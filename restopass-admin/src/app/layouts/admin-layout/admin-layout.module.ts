@@ -23,6 +23,7 @@ import { RestoEditComponent } from 'app/pages/restos/resto-edit/resto-edit.compo
 import { RestoListComponent } from 'app/pages/restos/resto-list/resto-list.component';
 import {MatTableModule} from '@angular/material/table'; 
 import {ToastModule} from 'primeng/toast';
+import {TableModule} from 'primeng/table';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +38,7 @@ import {ToastModule} from 'primeng/toast';
     MatTooltipModule,
     MatTableModule,
     ToastModule,
+    TableModule,
   ],
   declarations: [
     DashboardComponent,

@@ -284,22 +284,16 @@ class _TransfertPageState extends State<TransfertPage> {
       child: FutureBuilder(
           future: _futureTransfert,
           builder: (context, AsyncSnapshot<List<Transfert>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+            if (snapshot.hasData) {
+              return Expanded(
+                  child: _afficherListTransfert(context, snapshot.data));
+            } else if (snapshot.hasError) {
+              return _errorWidget(context);
+            } else {
               return Container(
                 margin: EdgeInsets.only(top: 30),
                 child: spinner(PRIMARY_COLOR, 50),
               );
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return _errorWidget(context);
-              } else if (snapshot.hasData) {
-                return Expanded(
-                    child: _afficherListTransfert(context, snapshot.data));
-              } else {
-                return logOut(context);
-              }
-            } else {
-              return Text('State: ${snapshot.connectionState}');
             }
           }),
     );

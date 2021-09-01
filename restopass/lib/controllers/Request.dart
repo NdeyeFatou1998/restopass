@@ -175,4 +175,48 @@ abstract class Request {
     log(response.body, name: "NEW PASSWORD");
     return response;
   }
+
+  static Future<Response?> setPassword(
+      String currentPassword, String newPassword) async {
+    var uri = Uri.parse(API + '/etudiant/edit-password');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var client = new http.Client();
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    http.Response response = await client.post(uri,
+        body: json.encode(
+            {'old_password': currentPassword, 'new_password': newPassword}),
+        headers: hdrs);
+    return responseFromJson(response.body);
+  }
+
+  static Future<Response?> setPin(String currentPin, String newPin) async {
+    var uri = Uri.parse(API + '/etudiant/edit-pin');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var client = new http.Client();
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    http.Response response = await client.post(uri,
+        body: json.encode({'old_pin': currentPin, 'new_pin': newPin}),
+        headers: hdrs);
+
+    print("NEW PIN: " + response.body);
+    return responseFromJson(response.body);
+  }
 }
