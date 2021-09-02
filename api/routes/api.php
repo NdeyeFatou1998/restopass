@@ -69,6 +69,7 @@ Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
 Route::get('tarifs',  [RestoController::class, 'tarifs'])->middleware(['auth:controller']);
 
 Route::middleware(['auth:api'])->group(function () {
+
     Route::post('/payment', [PayTechController::class, 'payment']);
 
     Route::post('/pay-ipn', [PayTechController::class, 'ipn'])->withoutMiddleware('auth:api');
