@@ -7,6 +7,7 @@ use App\Http\Controllers\VigilController;
 use App\Http\Controllers\CompteController;
 use App\Http\Controllers\PayTechController;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 
 /**
@@ -27,11 +28,25 @@ Route::prefix('admin')->middleware(['auth:admin', 'cors'])->group(function () {
     Route::post('affecter-vigil', [VigilController::class, 'affecterA']);
 });
 
+// REPRENEUR
 
+Route::middleware(['auth:admin', 'cors'])->group(function () {
+    Route::get('/repreneurs', [AdminController::class, 'repreneurs']);
+});
+
+Route::prefix('vigil')->middleware(['auth:admin', 'cors'])->group(function () {
+    Route::get('/all', [VigilController::class, 'index']);
+    Route::post('/create', [VigilController::class, 'store']);
+    Route::post('/delete/{vigil}', [VigilController::class, 'destroy']);
+    Route::get('/show/{vigil}', [VigilController::class, 'show']);
+});
 
 
 Route::prefix('resto')->middleware(['auth:admin'])->group(function () {
     Route::get('/', [RestoController::class, 'index']);
+    Route::post('/create', [RestoController::class, 'create']);
+    Route::post('/delete/{resto}', [RestoController::class, 'destroy']);
+    Route::get('/show/{resto}', [RestoController::class, 'show']);
 });
 
 Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
@@ -58,8 +73,10 @@ Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
 });
 
 Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
-    Route::post('/register', [VigilController::class, 'store'])->withoutMiddleware('auth:controller');
-    Route::post('/login', [VigilController::class, 'login'])->withoutMiddleware('auth:controller');
+    Route::post('/register', [VigilController::class, 'store'])
+        ->withoutMiddleware('auth:controller');
+    Route::post('/login', [VigilController::class, 'login'])
+        ->withoutMiddleware('auth:controller');
     Route::post('/logout', [VigilController::class, 'logout']);
 
     Route::get('/', [VigilController::class, 'user']);
@@ -72,7 +89,10 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::post('/payment', [PayTechController::class, 'payment']);
 
-    Route::post('/pay-ipn', [PayTechController::class, 'ipn'])->withoutMiddleware('auth:api');
-    Route::get('/pay-cancel', [PayTechController::class, 'cancel'])->withoutMiddleware('auth:api');
-    Route::get('/pay-success', [PayTechController::class, 'succss'])->withoutMiddleware('auth:api');
+    Route::post('/pay-ipn', [PayTechController::class, 'ipn'])
+        ->withoutMiddleware('auth:api');
+    Route::get('/pay-cancel', [PayTechController::class, 'cancel'])
+        ->withoutMiddleware('auth:api');
+    Route::get('/pay-success', [PayTechController::class, 'succss'])
+        ->withoutMiddleware('auth:api');
 });

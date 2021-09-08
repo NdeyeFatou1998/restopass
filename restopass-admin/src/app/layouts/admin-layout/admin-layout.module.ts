@@ -22,8 +22,14 @@ import { RestoCreateComponent } from 'app/pages/restos/resto-create/resto-create
 import { RestoEditComponent } from 'app/pages/restos/resto-edit/resto-edit.component';
 import { RestoListComponent } from 'app/pages/restos/resto-list/resto-list.component';
 import {MatTableModule} from '@angular/material/table'; 
-import {ToastModule} from 'primeng/toast';
-import {TableModule} from 'primeng/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -37,8 +43,13 @@ import {TableModule} from 'primeng/table';
     MatSelectModule,
     MatTooltipModule,
     MatTableModule,
-    ToastModule,
-    TableModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    NzEmptyModule,
+    NzModalModule,
+    NzInputModule,
+    NzFormModule,
+    NzSelectModule,
   ],
   declarations: [
     DashboardComponent,

@@ -1,3 +1,96 @@
 <div class="main-content">
-
+    <div class="container-fluid" *ngIf="!isLoad; else loader">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="
+                card-title
+                d-flex
+                justify-content-between
+                align-items-center
+              ">
+                            <div>
+                                <h4 class="text-white">Restaurants</h4>
+                            </div>
+                            <div class="m-1">
+                                <button mat-mini-fab="mat-mini-fab" color="default" (click)="openCreateModal()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <ng-container *ngIf="restos.length != 0; else elseTemplate">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <th>Nom</th>
+                                        <th>Capacité</th>
+                                        <th>Repreneur</th>
+                                        <th>Repreneur Email</th>
+                                        <th>Université</th>
+                                        <th>Mode</th>
+                                        <th class="text-center">Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let resto of restos">
+                                            <td>{{ resto.name }}</td>
+                                            <td>{{ resto.capacity }}</td>
+                                            <td>{{ resto.repreneur_name }}</td>
+                                            <td>{{ resto.repreneur_email }}</td>
+                                            <td>{{ resto.universite }}</td>
+                                            <td>
+                                                <ng-container *ngIf="resto.is_free; else notFree">
+                                                    <span class="badge-danger shadow-sm">Sans Ticket</span>
+                                                </ng-container>
+                                                <ng-template #notFree>
+                                                    <span class="badge-success shadow-sm">Avec Ticket</span>
+                                                </ng-template>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="mx-1">
+                                                        <button mat-mini-fab="mat-mini-fab" color="primary">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="mx-1">
+                                                        <button mat-mini-fab="mat-mini-fab" color="warn">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <div class="text-center m-3">
+                                    <nz-empty nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+                                        <ng-template #contentTpl>
+                                            <span> Liste vide </span>
+                                        </ng-template>
+                                        <ng-template #footerTpl>
+                                            <button mat-raised-button (click)="openCreateModal()">
+                                                Ajouter un resto
+                                            </button>
+                                        </ng-template>
+                                    </nz-empty>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<ng-template #loader>
+    <div class="loader"></div>
+    <h4 class="text-center">Chargement en cours...</h4>
+</ng-template>
+
+<!-- CREATE MODAL -->
+<resto-create (create)="onCreateResto($event)" [univs]="univs" [repreneurs]="repreneurs" [isVisible]="createRestoModalVisible" (close)="closeCreateModal()"></resto-create>

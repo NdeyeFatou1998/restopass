@@ -32,7 +32,7 @@ class AuthController extends Controller
             $response = [
                 'token' => $token,
                 'user' => $user,
-                'roles' => json_decode($user->roles)
+                'roles' => $user->roles->pluck('name')->all()
             ];
             return response($response, 200);
         } else {
@@ -58,7 +58,6 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->roles = json_encode($request->roles);
         $user->save();
 
         $user->assignRole($request->roles);

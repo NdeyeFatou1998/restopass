@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:restopass/models/LoginData.dart';
 import 'package:restopass/models/LoginResponse.dart';
+import 'package:restopass/models/PayTechResponse.dart';
 import 'package:restopass/models/Payment.dart';
 import 'package:restopass/models/RefreshResponse.dart';
 import 'package:restopass/models/Response.dart';
@@ -218,5 +219,32 @@ abstract class Request {
 
     print("NEW PIN: " + response.body);
     return responseFromJson(response.body);
+  }
+
+  static Future<PayTech?> payement(int amount) async {
+    var uri = Uri.parse(API + '/payment');
+    String? token = await SharedPref.getToken();
+
+    if (token == null) {
+      return null;
+    }
+
+    var client = new http.Client();
+    var hdrs = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    };
+    http.Response response = await client.post(uri,
+        body: json.encode({
+          'amount': amount,
+        }),
+        headers: hdrs);
+    print("PAY RESPONSE: " + response.body);
+
+    if (response.statusCode == 200) {
+      return paytechFromJson(response.body);
+    }
+    return null;
   }
 }

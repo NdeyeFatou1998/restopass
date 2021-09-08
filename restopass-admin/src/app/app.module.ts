@@ -27,10 +27,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { RestoListComponent } from './pages/restos/resto-list/resto-list.component';
-import { RestoCreateComponent } from './pages/restos/resto-create/resto-create.component';
-import { RestoEditComponent } from './pages/restos/resto-edit/resto-edit.component';
-import { RestoShowComponent } from './pages/restos/resto-show/resto-show.component'; 
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { fr_FR } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import fr from '@angular/common/locales/fr';
+
+registerLocaleData(fr); 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -54,7 +56,7 @@ import { RestoShowComponent } from './pages/restos/resto-show/resto-show.compone
     LoginComponent,
     
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: fr_FR }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

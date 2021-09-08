@@ -1,6 +1,10 @@
+import { User } from "./../../../models/user";
 import { Resto } from "./../../../models/resto";
 import { Component, OnInit } from "@angular/core";
 import { RestosService } from "app/services/restos.service";
+import { Universite } from "app/models/universite";
+import { RestoResponse } from "app/models/resto-response";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "resto-list",
@@ -9,13 +13,18 @@ import { RestosService } from "app/services/restos.service";
 })
 export class RestoListComponent implements OnInit {
   restos: Resto[];
+  univs: Universite[];
+  repreneurs: User[];
   isLoad: boolean = true;
   selectedResto: Resto;
   cloneResto: Resto;
-  first = 0;
+  createRestoModalVisible: boolean = false;
 
-  rows = 10;
-  constructor(private restoService: RestosService) {}
+
+  constructor(
+    private restoService: RestosService,
+    private fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
     this.findAll();
@@ -24,8 +33,12 @@ export class RestoListComponent implements OnInit {
   findAll() {
     this.isLoad = true;
     this.restoService.findAll().subscribe({
-      next: (response: Resto[]) => {
-        console.log("RESPONSE", response);
+      next: (response: RestoResponse) => {
+        this.restos = response.restos;
+        this.univs = response.universites;
+        this.repreneurs = response.repreneurs;
+        console.log("UNIVS", this.univs);
+        
         this.isLoad = false;
       },
       error: (error) => {
@@ -35,25 +48,19 @@ export class RestoListComponent implements OnInit {
     });
   }
 
-  next() {
-    this.first = this.first + this.rows;
+  onCreateResto(resto: Resto){
+    console.log("NEW RESTO IN LIST", resto);
+    
+    this.restos.push(resto);
   }
 
-  prev() {
-    this.first = this.first - this.rows;
+  openCreateModal() {
+    this.createRestoModalVisible = true;
   }
 
-  reset() {
-    this.first = 0;
+  closeCreateModal(){
+    this.createRestoModalVisible = false;
   }
 
-  isLastPage(): boolean {
-    return this.restos
-      ? this.first === this.restos.length - this.rows
-      : true;
-  }
-
-  isFirstPage(): boolean {
-    return this.restos ? this.first === 0 : true;
-  }
+  
 }
