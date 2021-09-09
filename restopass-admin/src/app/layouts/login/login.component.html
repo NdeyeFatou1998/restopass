@@ -20,11 +20,11 @@
                                 </div>
                             </div>
                             <button (click)="login()" [disabled]="validate()" mat-raised-button="mat-raised-button" type="submit" class="btn btn-primary pull-right">
-                <div *ngIf="isLoad; else showText">
-                  <div class="loader"></div>
-                </div>
-                <ng-template #showText>Se connecter</ng-template>
-              </button>
+                                <div *ngIf="isLoad; else showText">
+                                    <div class="loader"></div>
+                                </div>
+                                <ng-template #showText>Se connecter</ng-template>
+                            </button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

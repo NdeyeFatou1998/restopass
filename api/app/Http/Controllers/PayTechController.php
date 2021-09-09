@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Compte;
+use App\Models\Payement;
+use App\Models\Rechargement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PayTechController extends Controller
 {
     const URL_BASE = "https://paytech.sn/api";
     const COMMAND_NAME = "Achat de tickets";
-    const HOST = "https://restopass-senegal.herokuapp.com";
+    const HOST = "https://univ-resto.herokuapp.com";
     const PAYTECH = "https://paytech.sn";
     private $api_key;
     private $secret_key;
@@ -26,7 +29,7 @@ class PayTechController extends Controller
      */
     public function succss(Request $request)
     {
-        return "AFTER PAYEMENT";
+        return view('pay-succes');
     }
 
     /**
@@ -34,7 +37,7 @@ class PayTechController extends Controller
      */
     public function cancel(Request $request)
     {
-        return "PAYEMENT ANNULER";
+        return view('pay-cancel');
     }
 
     /**
@@ -42,13 +45,39 @@ class PayTechController extends Controller
      */
     public function ipn(Request $request)
     {
-        # code...
+        $api_key_sha256 = $request->api_key_sha256;
+        $api_secret_sha256 = $request->api_secret_sha256;
+
+        if (hash('sha256', $this->secret_key) === $api_secret_sha256 && hash('sha256', $this->api_key) === $api_key_sha256) {
+            if ($request->type_event === "sale_complete") {
+
+                DB::beginTransaction();
+
+                $data = json_decode($request->custom_field, true);
+                $user = User::whereEmail($data['email'])->first();
+                $compte = Compte::whereUserId($user->id)->first();
+                $compte->pay += (int)$request->item_price;
+                $compte->save();
+
+                $pay = new Rechargement;
+                $pay->transaction_num = $data['ref'];
+                $pay->amount = (int)$request->item_price;
+                $pay->phone_number = $request->client_phone;
+                $pay->via = $request->payment_method;
+                $pay->compte_id = $compte->id;
+                $pay->save();
+
+                DB::commit();
+            }
+        }
     }
 
+    /**
+     * Demande de payement
+     */
     public function payment(Request $request)
     {
         $this->validate($request, [
-            'phone_number' => 'required',
             'amount' => 'required|numeric'
         ]);
 
@@ -58,7 +87,6 @@ class PayTechController extends Controller
         $customfield = json_encode([
             'email' => $user->email,
             'amount' => $request->amount,
-            'phone_number' => $request->phone_number,
             'ref' => $ref,
         ]);
 
@@ -77,7 +105,11 @@ class PayTechController extends Controller
         return $this->requestPayment($data);
     }
 
-    private function requestPayment($data){
+    /**
+     * Requet vers PayTech
+     */
+    private function requestPayment($data)
+    {
         $ch = curl_init(self::URL_BASE . "/payment/request-payment");
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
@@ -96,10 +128,9 @@ class PayTechController extends Controller
 
         $jsonResponse = json_decode($rawResponse, true);
 
-        if($jsonResponse != null && $jsonResponse['success'] === 1){
+        if ($jsonResponse != null && $jsonResponse['success'] === 1) {
             return response()->json($jsonResponse, 200);
-        }
-        else{
+        } else {
             return response()->json([
                 "message" => "Une erreur c'est produit. Merci de réessayer plustard.",
                 "code" => 500,

@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                 _currentPage = TransactionPage(widget.user);
                 break;
               case 3:
-                _currentPage = rechargementPage(context);
+                _currentPage = RechargementPage();
                 break;
               case 4:
                 _currentPage = SettingsPage(widget.user, widget.compte.value);

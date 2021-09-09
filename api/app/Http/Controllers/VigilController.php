@@ -12,6 +12,7 @@ use App\Models\Compte;
 use App\Models\Payement;
 use Illuminate\Http\Request;
 use App\Utils\Constante as C;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -228,9 +229,20 @@ class VigilController extends Controller
         return $res;
     }
 
-
     private function sansTicket($id)
     {
         return Resto::find($id)->is_free;
     }
+
+    public function show(Vigil $vigil)
+    {
+        return $vigil;
+    }
+
+    public function destroy(Vigil $vigil)
+    {
+        $vigil->delete();
+        return response()->json($vigil, Response::HTTP_OK);
+    }
+
 }

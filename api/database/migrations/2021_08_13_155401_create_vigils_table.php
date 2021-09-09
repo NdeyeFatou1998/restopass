@@ -23,7 +23,7 @@ class CreateVigilsTable extends Migration
             $table->string("image_path")->nullable();
 
             $table->unsignedBigInteger("resto_id")->nullable();
-            $table->foreign("resto_id")->references("id")->on("restos");
+            $table->foreign("resto_id")->references("id")->on("restos")->onDelete('set null');
 
             $table->timestamps();
         });
