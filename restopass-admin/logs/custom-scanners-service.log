@@ -1,61 +1,322 @@
-2021-09-08 22:05:46.657  INFO 4418 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 4418 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
-2021-09-08 22:05:46.781  INFO 4418 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
-2021-09-08 22:05:56.056  INFO 4418 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
-2021-09-08 22:05:56.087  INFO 4418 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-09-08 22:05:56.088  INFO 4418 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
-2021-09-08 22:05:56.453  INFO 4418 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-09-08 22:05:56.454 DEBUG 4418 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
-2021-09-08 22:05:56.455  INFO 4418 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 9201 ms
-2021-09-08 22:05:57.285 DEBUG 4418 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
-2021-09-08 22:05:57.286 DEBUG 4418 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
-2021-09-08 22:06:06.264 DEBUG 4418 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
-2021-09-08 22:06:06.616  INFO 4418 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2021-09-08 22:06:07.303  INFO 4418 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-09-08 22:06:08.210  INFO 4418 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-09-08 22:06:08.315 DEBUG 4418 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-09-08 22:06:09.348 DEBUG 4418 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-09-08 22:06:09.477 DEBUG 4418 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-09-08 22:06:10.150  INFO 4418 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-09-08 22:06:10.461  INFO 4418 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-09-08 22:06:10.841  INFO 4418 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-09-08 22:06:13.115  INFO 4418 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
-2021-09-08 22:06:13.136  INFO 4418 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 31.19 seconds (JVM running for 35.867)
-2021-09-08 22:07:05.593  INFO 4791 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 4791 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
-2021-09-08 22:07:05.635  INFO 4791 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
-2021-09-08 22:07:18.539  INFO 4791 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
-2021-09-08 22:07:18.651  INFO 4791 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-09-08 22:07:18.661  INFO 4791 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
-2021-09-08 22:07:19.119  INFO 4791 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-09-08 22:07:19.121 DEBUG 4791 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
-2021-09-08 22:07:19.130  INFO 4791 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 13023 ms
-2021-09-08 22:07:20.324 DEBUG 4791 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
-2021-09-08 22:07:20.326 DEBUG 4791 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
-2021-09-08 22:07:29.519 DEBUG 4791 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
-2021-09-08 22:07:29.900  INFO 4791 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2021-09-08 22:07:30.460  INFO 4791 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-09-08 22:07:30.978  INFO 4791 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-09-08 22:07:31.108 DEBUG 4791 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-09-08 22:07:31.617 DEBUG 4791 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-09-08 22:07:31.680 DEBUG 4791 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-09-08 22:07:32.136  INFO 4791 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-09-08 22:07:32.448  INFO 4791 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-09-08 22:07:32.783  INFO 4791 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-09-08 22:07:34.653  INFO 4791 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-09-08 22:07:34.726  INFO 4791 --- [main] ConditionEvaluationReportLoggingListener : 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2021-09-08 22:07:34.732 ERROR 4791 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Web server failed to start. Port 9221 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 9221 or configure this application to listen on another port.
-
-2021-09-08 22:07:34.749  INFO 4791 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:16:43.250  INFO 12001 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 12001 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:16:43.306  INFO 12001 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:16:48.056  INFO 12001 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:16:48.081  INFO 12001 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:16:48.081  INFO 12001 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:16:48.252  INFO 12001 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:16:48.261 DEBUG 12001 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:16:48.261  INFO 12001 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4682 ms
+2021-09-09 01:16:48.611 DEBUG 12001 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:16:48.612 DEBUG 12001 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:16:52.096 DEBUG 12001 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:16:52.204  INFO 12001 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:16:52.372  INFO 12001 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:16:52.583  INFO 12001 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:16:52.630 DEBUG 12001 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:16:52.916 DEBUG 12001 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:16:52.940 DEBUG 12001 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:16:53.048  INFO 12001 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:16:53.085  INFO 12001 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:16:53.168  INFO 12001 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:16:54.186  INFO 12001 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:16:54.197  INFO 12001 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 13.761 seconds (JVM running for 17.681)
+2021-09-09 01:16:54.445  INFO 12001 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:16:54.446  INFO 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:16:54.447 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:16:54.500 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:16:54.501  INFO 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 54 ms
+2021-09-09 01:16:54.525 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:16:54.544 DEBUG 12001 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:16:54.611 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:16:54.633 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.CommMisconfig=CustomScannersServiceScanRule{ruleNam (truncated)...]
+2021-09-09 01:16:54.731 DEBUG 12001 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:18:36.558 DEBUG 12001 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:18:36.565 DEBUG 12001 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:18:36.660 DEBUG 12001 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:18:36.662 DEBUG 12001 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:18:36.668 DEBUG 12001 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:18:47.079 DEBUG 12001 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:18:47.081 DEBUG 12001 --- [http-nio-9221-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:18:47.142 DEBUG 12001 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:18:47.143 DEBUG 12001 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:18:47.149 DEBUG 12001 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:19:07.781  INFO 12446 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 12446 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:19:07.788  INFO 12446 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:19:14.287  INFO 12446 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:19:14.327  INFO 12446 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:19:14.330  INFO 12446 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:19:14.544  INFO 12446 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:19:14.548 DEBUG 12446 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:19:14.550  INFO 12446 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 6625 ms
+2021-09-09 01:19:15.068 DEBUG 12446 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:19:15.069 DEBUG 12446 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:19:21.109 DEBUG 12446 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:19:21.488  INFO 12446 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:19:21.853  INFO 12446 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:19:22.453  INFO 12446 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:19:22.580 DEBUG 12446 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:19:23.201 DEBUG 12446 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:19:23.271 DEBUG 12446 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:19:23.629  INFO 12446 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:19:23.725  INFO 12446 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:19:23.942  INFO 12446 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:19:25.365  INFO 12446 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:19:25.375  INFO 12446 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 20.287 seconds (JVM running for 23.708)
+2021-09-09 01:19:25.737  INFO 12446 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:19:25.740  INFO 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:19:25.742 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:19:25.781 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:19:25.784  INFO 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 42 ms
+2021-09-09 01:19:25.822 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:19:25.852 DEBUG 12446 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:19:25.912 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:19:25.949 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.CommMisconfig=CustomScannersServiceScanRule{ruleNam (truncated)...]
+2021-09-09 01:19:26.086 DEBUG 12446 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:20:02.483 DEBUG 12446 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:20:02.499 DEBUG 12446 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:20:02.724 DEBUG 12446 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:20:02.798 DEBUG 12446 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:20:02.808 DEBUG 12446 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:24:43.927 DEBUG 12446 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:24:43.933 DEBUG 12446 --- [http-nio-9221-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:24:44.007 DEBUG 12446 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:24:44.008 DEBUG 12446 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:24:44.011 DEBUG 12446 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:24:44.050 DEBUG 12446 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:24:44.058 DEBUG 12446 --- [http-nio-9221-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:24:44.104 DEBUG 12446 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:24:44.112 DEBUG 12446 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:24:44.122 DEBUG 12446 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:25:11.866  INFO 13172 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 13172 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:25:11.909  INFO 13172 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:25:19.957  INFO 13172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:25:19.984  INFO 13172 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:25:19.985  INFO 13172 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:25:20.174  INFO 13172 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:25:20.177 DEBUG 13172 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:25:20.178  INFO 13172 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7522 ms
+2021-09-09 01:25:20.658 DEBUG 13172 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:25:20.659 DEBUG 13172 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:25:24.172 DEBUG 13172 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:25:24.341  INFO 13172 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:25:24.514  INFO 13172 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:25:24.723  INFO 13172 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:25:24.765 DEBUG 13172 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:25:25.117 DEBUG 13172 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:25:25.135 DEBUG 13172 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:25:25.250  INFO 13172 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:25:25.298  INFO 13172 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:25:25.370  INFO 13172 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:25:26.426  INFO 13172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:25:26.440  INFO 13172 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 19.216 seconds (JVM running for 25.119)
+2021-09-09 01:25:26.783  INFO 13172 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:25:26.784  INFO 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:25:26.788 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:25:26.803 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:25:26.804  INFO 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2021-09-09 01:25:26.837 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:25:26.896 DEBUG 13172 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:25:26.996 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:25:27.022 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
+2021-09-09 01:25:27.121 DEBUG 13172 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:26:29.778 DEBUG 13172 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:26:29.784 DEBUG 13172 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:26:29.903 DEBUG 13172 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:26:29.906 DEBUG 13172 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:26:29.912 DEBUG 13172 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:27:39.426  INFO 13893 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 13893 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:27:39.447  INFO 13893 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:27:49.543  INFO 13893 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:27:49.584  INFO 13893 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:27:49.587  INFO 13893 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:27:49.807  INFO 13893 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:27:49.810 DEBUG 13893 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:27:49.811  INFO 13893 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 9870 ms
+2021-09-09 01:27:50.329 DEBUG 13893 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:27:50.330 DEBUG 13893 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:27:56.099 DEBUG 13893 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:27:56.373  INFO 13893 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:27:56.846  INFO 13893 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:27:57.386  INFO 13893 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:27:57.558 DEBUG 13893 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:27:58.101 DEBUG 13893 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:27:58.150 DEBUG 13893 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:27:58.489  INFO 13893 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:27:58.595  INFO 13893 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:27:58.733  INFO 13893 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:28:00.066  INFO 13893 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:28:00.088  INFO 13893 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 25.173 seconds (JVM running for 30.813)
+2021-09-09 01:28:00.488  INFO 13893 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:28:00.497  INFO 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:28:00.501 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:28:00.557 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:28:00.558  INFO 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 58 ms
+2021-09-09 01:28:00.593 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:28:00.651 DEBUG 13893 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:28:00.759 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:28:00.798 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
+2021-09-09 01:28:01.002 DEBUG 13893 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:29:00.359 DEBUG 13893 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:29:00.368 DEBUG 13893 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:29:00.493 DEBUG 13893 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:29:00.499 DEBUG 13893 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:29:00.505 DEBUG 13893 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:32:08.039 DEBUG 13893 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:32:08.046 DEBUG 13893 --- [http-nio-9221-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:32:08.298  WARN 13893 --- [http-nio-9221-exec-3] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:32:08.314  WARN 13893 --- [http-nio-9221-exec-3] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:32:08.318 DEBUG 13893 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:32:08.322 DEBUG 13893 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[CustomScannersServiceFinding{file='resto-create.component.ts',  (truncated)...]
+2021-09-09 01:32:08.577 DEBUG 13893 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:35:24.066 DEBUG 13893 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/v1/ignore/ruleName", parameters={}
+2021-09-09 01:35:24.083 DEBUG 13893 --- [http-nio-9221-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getRuleNameIgnoreRules()
+2021-09-09 01:35:24.090 DEBUG 13893 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:35:24.092 DEBUG 13893 --- [http-nio-9221-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:35:24.094 DEBUG 13893 --- [http-nio-9221-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:35:24.152 DEBUG 13893 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [[]]
+2021-09-09 01:35:24.155 DEBUG 13893 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:35:24.191  WARN 13893 --- [http-nio-9221-exec-5] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:35:24.191  WARN 13893 --- [http-nio-9221-exec-5] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:35:24.192 DEBUG 13893 --- [http-nio-9221-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:35:24.193 DEBUG 13893 --- [http-nio-9221-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[CustomScannersServiceFinding{file='resto-list.component.ts', li (truncated)...]
+2021-09-09 01:35:24.200 DEBUG 13893 --- [http-nio-9221-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:37:14.294  INFO 14912 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 14912 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:37:14.307  INFO 14912 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:37:19.395  INFO 14912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:37:19.434  INFO 14912 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:37:19.435  INFO 14912 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:37:19.620  INFO 14912 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:37:19.622 DEBUG 14912 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:37:19.623  INFO 14912 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4995 ms
+2021-09-09 01:37:20.076 DEBUG 14912 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:37:20.077 DEBUG 14912 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:37:23.628 DEBUG 14912 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:37:23.869  INFO 14912 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:37:24.173  INFO 14912 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:37:24.540  INFO 14912 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:37:24.606 DEBUG 14912 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:37:25.228 DEBUG 14912 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:37:25.291 DEBUG 14912 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:37:25.514  INFO 14912 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:37:25.594  INFO 14912 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:37:25.722  INFO 14912 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:37:27.028  INFO 14912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:37:27.036  INFO 14912 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 15.837 seconds (JVM running for 19.831)
+2021-09-09 01:37:27.334  INFO 14912 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:37:27.339  INFO 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:37:27.344 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:37:27.355 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:37:27.355  INFO 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2021-09-09 01:37:27.375 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:37:27.392 DEBUG 14912 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:37:27.430 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:37:27.445 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
+2021-09-09 01:37:27.536 DEBUG 14912 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:38:01.559 DEBUG 14912 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:38:01.568 DEBUG 14912 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:38:01.680 DEBUG 14912 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:38:01.684 DEBUG 14912 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[], articles={}}]
+2021-09-09 01:38:01.690 DEBUG 14912 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:38:31.734  INFO 15565 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 15565 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:38:31.758  INFO 15565 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:38:39.428  INFO 15565 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:38:39.558  INFO 15565 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:38:39.563  INFO 15565 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:38:39.899  INFO 15565 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:38:39.903 DEBUG 15565 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:38:39.905  INFO 15565 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7747 ms
+2021-09-09 01:38:40.776 DEBUG 15565 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:38:40.780 DEBUG 15565 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:38:47.727 DEBUG 15565 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:38:47.957  INFO 15565 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:38:48.778  INFO 15565 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:38:49.272  INFO 15565 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:38:49.341 DEBUG 15565 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:38:49.791 DEBUG 15565 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:38:49.844 DEBUG 15565 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:38:50.111  INFO 15565 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:38:50.193  INFO 15565 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:38:50.340  INFO 15565 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:38:51.631  INFO 15565 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:38:51.662  INFO 15565 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 23.924 seconds (JVM running for 28.139)
+2021-09-09 01:38:52.154  INFO 15565 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:38:52.162  INFO 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:38:52.163 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:38:52.213 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:38:52.221  INFO 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 59 ms
+2021-09-09 01:38:52.278 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:38:52.310 DEBUG 15565 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:38:52.449 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:38:52.482 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.CommMisconfig=CustomScannersServiceScanRule{ruleNam (truncated)...]
+2021-09-09 01:38:52.644 DEBUG 15565 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:39:35.636  INFO 16125 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 16125 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:39:35.657  INFO 16125 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:39:41.787  INFO 16125 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:39:41.818  INFO 16125 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:39:41.819  INFO 16125 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:39:41.938  INFO 16125 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:39:41.939 DEBUG 16125 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:39:41.939  INFO 16125 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 6066 ms
+2021-09-09 01:39:42.339 DEBUG 16125 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:39:42.340 DEBUG 16125 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:39:45.910 DEBUG 16125 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:39:45.984  INFO 16125 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:39:46.121  INFO 16125 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:39:46.312  INFO 16125 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:39:46.373 DEBUG 16125 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:39:46.718 DEBUG 16125 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:39:46.755 DEBUG 16125 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:39:47.044  INFO 16125 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:39:47.097  INFO 16125 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:39:47.190  INFO 16125 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:39:48.191  INFO 16125 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:39:48.209  INFO 16125 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 15.635 seconds (JVM running for 19.099)
+2021-09-09 01:39:48.445  INFO 16125 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:39:48.446  INFO 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:39:48.447 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:39:48.467 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:39:48.468  INFO 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 21 ms
+2021-09-09 01:39:48.500 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:39:48.516 DEBUG 16125 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:39:48.577 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:39:48.597 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.CommMisconfig=CustomScannersServiceScanRule{ruleNam (truncated)...]
+2021-09-09 01:39:48.732 DEBUG 16125 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:41:06.909  INFO 16657 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication on linux with PID 16657 (/home/yuri/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.1.4/lib/custom-scanners-service-1.0.11.jar started by yuri in /home/yuri/Documents/Projets/nf2/restopass-admin)
+2021-09-09 01:41:06.929  INFO 16657 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to default profiles: default
+2021-09-09 01:41:14.674  INFO 16657 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9221 (http)
+2021-09-09 01:41:14.736  INFO 16657 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-09 01:41:14.749  INFO 16657 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2021-09-09 01:41:15.217  INFO 16657 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-09 01:41:15.217 DEBUG 16657 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-09-09 01:41:15.218  INFO 16657 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7891 ms
+2021-09-09 01:41:16.060 DEBUG 16657 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2021-09-09 01:41:16.073 DEBUG 16657 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-09-09 01:41:23.246 DEBUG 16657 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 19 mappings in 'requestMappingHandlerMapping'
+2021-09-09 01:41:23.514  INFO 16657 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-09-09 01:41:23.857  INFO 16657 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-09-09 01:41:24.239  INFO 16657 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-09 01:41:24.326 DEBUG 16657 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-09-09 01:41:24.739 DEBUG 16657 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-09-09 01:41:24.783 DEBUG 16657 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-09-09 01:41:25.018  INFO 16657 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-09-09 01:41:25.147  INFO 16657 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-09-09 01:41:25.372  INFO 16657 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-09-09 01:41:27.066  INFO 16657 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9221 (http) with context path ''
+2021-09-09 01:41:27.079  INFO 16657 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 24.685 seconds (JVM running for 29.124)
+2021-09-09 01:41:27.476  INFO 16657 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-09 01:41:27.477  INFO 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-09 01:41:27.478 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2021-09-09 01:41:27.532 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-09-09 01:41:27.533  INFO 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 55 ms
+2021-09-09 01:41:27.569 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2021-09-09 01:41:27.585 DEBUG 16657 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2021-09-09 01:41:27.680 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:41:27.702 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
+2021-09-09 01:41:27.874 DEBUG 16657 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2021-09-09 01:43:24.398 DEBUG 16657 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={masked}
+2021-09-09 01:43:24.406 DEBUG 16657 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2021-09-09 01:43:24.581  WARN 16657 --- [http-nio-9221-exec-2] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:43:24.584  WARN 16657 --- [http-nio-9221-exec-2] c.h.a.c.service.ArticleProvider          : Aucun article trouvÃ© pour vulnNameÂ : Private Data Logged Sink
+2021-09-09 01:43:24.586 DEBUG 16657 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json] and supported [application/json]
+2021-09-09 01:43:24.591 DEBUG 16657 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[CustomScannersServiceFinding{file='resto-list.component.ts', li (truncated)...]
+2021-09-09 01:43:24.756 DEBUG 16657 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

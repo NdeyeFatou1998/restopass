@@ -49,11 +49,24 @@ class RestoController extends Controller
         $request->validate([
             'name' => 'required',
             'universite_id' => 'required|exists:universites,id',
-            'repreneur_id' => 'required|exists:admins,id'
+            'repreneur_id' => 'required|exists:admins,id',
+            'capacity' => 'numeric'
         ]);
 
-        $resto = Resto::create($request);
-        return response()->json($resto, 200);
+        $resto = new Resto;
+        $resto->name = $request->name;
+        $resto->universite_id = $request->universite_id;
+        $resto->repreneur_id = $request->repreneur_id;
+        $resto->capacity = $request->capacity ?? 0;
+        $resto->save();
+
+        $response = DB::table("restos as R")
+            ->where('R.id', $resto->id)
+            ->join('admins as A', 'A.id', 'R.repreneur_id')
+            ->join("universites as U", "U.id", "R.universite_id")
+            ->select("R.*", "A.name as repreneur_name", "A.email as repreneur_email", "U.name as universite")
+            ->first();
+        return response()->json($response, 200);
     }
 
 

@@ -29,6 +29,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzFormModule,
     NzSelectModule,
+    NzButtonModule,
   ],
   declarations: [
     DashboardComponent,

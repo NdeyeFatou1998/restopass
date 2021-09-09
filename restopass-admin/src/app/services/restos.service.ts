@@ -9,7 +9,7 @@ import { RestoResponse } from "app/models/resto-response";
   providedIn: "root",
 })
 export class RestosService extends BaseService {
-  protected _baseUrl: string = "resto";
+  protected _baseUrl: string = "resto/";
   constructor(private http: HttpClient) {
     super();
   }
@@ -28,6 +28,7 @@ export class RestosService extends BaseService {
         'name': resto.name,
         'universite_id': resto.universite_id,
         'repreneur_id': resto.repreneur_id,
+        'capacity': resto.capacity ?? 0,
       },
       {
         headers: this.authorizationHeaders,

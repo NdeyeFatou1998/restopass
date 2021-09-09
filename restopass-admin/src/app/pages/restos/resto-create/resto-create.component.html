@@ -1,26 +1,41 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitCreateForm()">
-    <nz-form-item>
-        <nz-form-label nzRequired [nzSpan]="6" nzFor="email">Nom du resto</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Le nom est requi">
-            <input formControlName="name" nz-input class="m-input shadow-sm" name="name" type="text" id="name">
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-select formControlName="universite" [(ngModel)]="resto.universite_id">
-            <nz-option *ngFor="let item of univs" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-        </nz-select>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-select formControlName="repreneur" [(ngModel)]="resto.repreneur_id">
-            <nz-option *ngFor="let item of repreneurs" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-        </nz-select>
-    </nz-form-item>
+<div>
+    <form class="p-3" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="name">Nom du resto</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Le nom est requi">
+                <input [(ngModel)]="resto.name" formControlName="name" nz-input name="name" type="text" id="name">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="universite">Université</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Selectionner l'université">
+                <nz-select formControlName="universite" [(ngModel)]="resto.universite_id">
+                    <nz-option *ngFor="let item of univs" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+                </nz-select>
+            </nz-form-control>
 
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="repreneur">Repreneur</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Selectionner le repreneur">
 
-    <nz-form-item nz-row class="register-area">
-        <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button class="mx-2" mat-raised-button color="warn" (click)="closeModal()">Annuler</button>
-            <button mat-raised-button color="primary" (click)="createResto()">Ajouter</button>
-        </nz-form-control>
-    </nz-form-item>
-</form>
+                <nz-select formControlName="repreneur" [(ngModel)]="resto.repreneur_id">
+                    <nz-option *ngFor="let item of repreneurs" [nzValue]="item.id" [nzLabel]="item.name">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="capacity">Capacité</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+                <input [(ngModel)]="resto.capacity" formControlName="capacity" nz-input name="capacity" type="number" id="capacity">
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>
+
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="destroyModal(null)">Annuler</button>
+    <button nz-button nzType="primary" (click)="createResto()" [disabled]="!validateForm.valid" [nzLoading]="isLoad">Ajouter</button>
+</div>

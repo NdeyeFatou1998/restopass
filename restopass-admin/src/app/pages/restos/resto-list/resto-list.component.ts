@@ -5,6 +5,8 @@ import { RestosService } from "app/services/restos.service";
 import { Universite } from "app/models/universite";
 import { RestoResponse } from "app/models/resto-response";
 import { FormBuilder } from "@angular/forms";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { RestoCreateComponent } from "../resto-create/resto-create.component";
 
 @Component({
   selector: "resto-list",
@@ -18,12 +20,12 @@ export class RestoListComponent implements OnInit {
   isLoad: boolean = true;
   selectedResto: Resto;
   cloneResto: Resto;
-  createRestoModalVisible: boolean = false;
-
+  createRestoModalVisible: boolean = true;
 
   constructor(
     private restoService: RestosService,
     private fb: FormBuilder,
+    private modalService: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class RestoListComponent implements OnInit {
         this.univs = response.universites;
         this.repreneurs = response.repreneurs;
         console.log("UNIVS", this.univs);
-        
+
         this.isLoad = false;
       },
       error: (error) => {
@@ -48,19 +50,24 @@ export class RestoListComponent implements OnInit {
     });
   }
 
-  onCreateResto(resto: Resto){
-    console.log("NEW RESTO IN LIST", resto);
-    
-    this.restos.push(resto);
+  onCreateResto(resto: Resto) {
+    if (resto != null) this.restos.unshift(resto);
   }
 
   openCreateModal() {
-    this.createRestoModalVisible = true;
-  }
+    const modal = this.modalService.create({
+      nzTitle: "Ajouter un nouveau resto",
+      nzContent: RestoCreateComponent,
+      nzComponentParams: {
+        univs: this.univs,
+        repreneurs: this.repreneurs,
+      },
+      nzMaskClosable: false,
+      nzClosable: false,
+    });
 
-  closeCreateModal(){
-    this.createRestoModalVisible = false;
+    modal.afterClose.subscribe((data: Resto | null) =>
+      this.onCreateResto(data)
+    );
   }
-
-  
 }

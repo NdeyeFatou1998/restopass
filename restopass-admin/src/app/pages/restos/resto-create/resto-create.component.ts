@@ -12,19 +12,17 @@ import { NzModalRef } from "ng-zorro-antd/modal";
   styleUrls: ["./resto-create.component.css"],
 })
 export class RestoCreateComponent implements OnInit {
-  @Input() isVisible: boolean;
   @Input() univs: Universite[];
   @Input() repreneurs: User[];
-  @Output() create: EventEmitter<Resto> = new EventEmitter();
-  @Output() close: EventEmitter<boolean> = new EventEmitter();
 
   resto: Resto = new Resto();
   validateForm: FormGroup;
   isLoad: boolean = false;
-
+  title: string = "Ajouter un nouveau resto";
   constructor(
     private fb: FormBuilder,
     private restoService: RestosService,
+    private modal: NzModalRef
   ) {}
 
   ngOnInit(): void {
@@ -32,39 +30,43 @@ export class RestoCreateComponent implements OnInit {
       name: [null, [Validators.required, Validators.min(2)]],
       universite: [null, [Validators.required]],
       repreneur: [null, [Validators.required]],
+      capacity: [0, [Validators.required]],
     });
   }
 
-  submitCreateForm(): void {
+  submitForm(): void {
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(i)) {
         this.validateForm.controls[i].markAsDirty();
         this.validateForm.controls[i].updateValueAndValidity();
       }
     }
-    console.log(this.validateForm.value);
   }
 
   createResto() {
+    console.log("RESTO::::::::::",this.resto)
     this.isLoad = true;
     this.restoService.create(this.resto).subscribe({
-      next: response => {
+      next: (response) => {
         this.isLoad = false;
-        this.create.emit(response);
-        this.closeModal();
-        this.restoService.notify("top", "center", "Resto ajouté avec succès.", "success");
+        this.destroyModal(response);
+        this.restoService.notify(
+          "top",
+          "center",
+          "Resto ajouté avec succès.",
+          "success"
+        );
       },
-      error: errors => {
+      error: (errors) => {
         console.log(errors);
-        this.isVisible = false
-        this.restoService.notify("top", "center", errors, "success");
-      }
+        this.destroyModal(null);
+        this.restoService.notify("top", "center", errors.message, "danger");
+      },
     });
   }
 
-  closeModal() {
-    this.isVisible = false;
-    this.close.emit(true);
+  destroyModal(data: Resto|null): void {
+    console.log("DESTROY MODAL");
+    this.modal.destroy(data);
   }
-
 }
