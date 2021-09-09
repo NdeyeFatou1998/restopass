@@ -44,6 +44,7 @@ class RestoController extends Controller
         return response()->json($resto, 200);
     }
 
+	
     public function create(Request $request)
     {
         $request->validate([
@@ -72,14 +73,27 @@ class RestoController extends Controller
 
     public function edit(Request $request, Resto $resto)
     {
-        $resto->update($request->all());
-        return response()->json($resto, 200);
+        DB::table('restos')->whereId($resto->id)->update($request->all());
+        $response = DB::table("restos as R")
+            ->where('R.id', $resto->id)
+            ->join('admins as A', 'A.id', 'R.repreneur_id')
+            ->join("universites as U", "U.id", "R.universite_id")
+            ->select("R.*", "A.name as repreneur_name", "A.email as repreneur_email", "U.name as universite")
+            ->first();
+        return response()->json($response, 200);
     }
 
     public function tarifs()
     {
         return Tarif::all();
     }
+
+	public function setIsFree(Request $request, Resto $resto){
+		$request->validate(['status' => 'required|boolean']);
+		$resto->is_free = $request->status;
+		$resto->save();
+		return response()->json($request->status,200);
+	}
 
     /**
      * Voir la liste des entrees dans les restos

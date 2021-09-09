@@ -12,6 +12,14 @@
     padding: 5px;
 }
 
+.badge-danger:hover {
+    cursor: pointer;
+}
+
+.badge-success:hover {
+    cursor: pointer;
+}
+
 .center {
     margin: 0;
     position: absolute;

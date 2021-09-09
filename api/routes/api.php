@@ -45,8 +45,10 @@ Route::prefix('vigil')->middleware(['auth:admin', 'cors'])->group(function () {
 Route::prefix('resto')->middleware(['auth:admin'])->group(function () {
     Route::get('/', [RestoController::class, 'index']);
     Route::post('/create', [RestoController::class, 'create']);
-    Route::post('/delete/{resto}', [RestoController::class, 'destroy']);
+    Route::delete('/delete/{resto}', [RestoController::class, 'destroy']);
     Route::get('/show/{resto}', [RestoController::class, 'show']);
+    Route::post('/edit/{resto}', [RestoController::class, 'edit']);
+	Route::put('/status/{resto}', [RestoController::class, 'setIsFree']);
 });
 
 Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {

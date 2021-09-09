@@ -66,7 +66,6 @@ export class RestoCreateComponent implements OnInit {
   }
 
   destroyModal(data: Resto|null): void {
-    console.log("DESTROY MODAL");
     this.modal.destroy(data);
   }
 }

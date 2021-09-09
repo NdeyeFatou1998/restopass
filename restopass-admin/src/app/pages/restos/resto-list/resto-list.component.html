@@ -41,22 +41,24 @@
                                             <td>{{ resto.repreneur_email }}</td>
                                             <td>{{ resto.universite }}</td>
                                             <td>
-                                                <ng-container *ngIf="resto.is_free; else notFree">
-                                                    <span class="badge-danger shadow-sm">Sans Ticket</span>
-                                                </ng-container>
-                                                <ng-template #notFree>
-                                                    <span class="badge-success shadow-sm">Avec Ticket</span>
-                                                </ng-template>
+                                                <div mat-raised-button (click)="onFreeResto(resto)">
+                                                    <ng-container *ngIf="resto.is_free; else notFree">
+                                                        <span class="badge-danger shadow-sm">Sans Ticket</span>
+                                                    </ng-container>
+                                                    <ng-template #notFree>
+                                                        <span class="badge-success shadow-sm">Avec Ticket</span>
+                                                    </ng-template>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <div class="mx-1">
-                                                        <button mat-mini-fab="mat-mini-fab" color="primary">
+                                                        <button mat-mini-fab="mat-mini-fab" (click)="openEditModal(resto)" color="primary">
                                                             <mat-icon>edit</mat-icon>
                                                         </button>
                                                     </div>
                                                     <div class="mx-1">
-                                                        <button mat-mini-fab="mat-mini-fab" color="warn">
+                                                        <button (click)="onDeleteResto(resto)" mat-mini-fab="mat-mini-fab" color="warn">
                                                             <mat-icon>delete</mat-icon>
                                                         </button>
                                                     </div>
