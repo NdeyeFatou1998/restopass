@@ -35,7 +35,11 @@ class VigilController extends Controller
      */
     public function index()
     {
-        return Vigil::all();
+$vigils = DB::table("vigils as V")->join("restos as R","R.id","V.resto_id")->select("V.name","V.id", "V.email","V.matricule","V.telephone","V.resto_id","R.name as resto_name")->get();
+        return response()->json([
+            'vigils' => $vigils,
+            'restos' => Resto::all(),
+        ], 200);
     }
 
     /**
@@ -48,7 +52,8 @@ class VigilController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'telephone' => 'required|string'
+            'telephone' => 'required|string',
+			'resto_id' => 'required|exists:restos,id',
         ]);
 
         $num = (count(Vigil::all()) + 1);
@@ -59,12 +64,10 @@ class VigilController extends Controller
         $vigil->email = self::PREFIX_EMAIL . $num . self::SUFFIX_MAIL;
         $vigil->password = bcrypt(static::BASE_MATRICULE);
         $vigil->matricule = "RPV-" . time();
+		$vigil->resto_id = $request->resto_id;
         $vigil->save();
-
-        return response()->json([
-            'message' => 'Vigil ajouté avec succès.',
-            'vigil' => $vigil
-        ], 201);
+		$vigil->resto_name = Resto::find($vigil->resto_id)->name;
+        return response()->json($vigil, 201);
     }
 
     /**
@@ -243,6 +246,14 @@ class VigilController extends Controller
     {
         $vigil->delete();
         return response()->json($vigil, Response::HTTP_OK);
+    }
+
+	public function edit(Request $request, Vigil $vigil)
+    {
+        DB::table('vigils')->whereId($vigil->id)->update($request->all());
+		$r = Vigil::find($vigil->id);
+		$r->resto_name = Resto::find($r->resto_id)->name;
+        return response()->json($r, Response::HTTP_OK);
     }
 
 }

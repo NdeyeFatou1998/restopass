@@ -1,3 +1,7 @@
+import { VigilShowComponent } from './../../pages/vigils/vigil-show/vigil-show.component';
+import { VigilListComponent } from './../../pages/vigils/vigil-list/vigil-list.component';
+import { VigilEditComponent } from './../../pages/vigils/vigil-edit/vigil-edit.component';
+import { VigilCreateComponent } from './../../pages/vigils/vigil-create/vigil-create.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -30,7 +34,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { QRCodeModule } from 'angular2-qrcode';
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +56,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzFormModule,
     NzSelectModule,
     NzButtonModule,
+    QRCodeModule,
   ],
   declarations: [
     DashboardComponent,
@@ -65,7 +70,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     RestoListComponent,
     RestoCreateComponent,
     RestoEditComponent,
-    RestoShowComponent
+    RestoShowComponent,
+    VigilCreateComponent,
+    VigilEditComponent,
+    VigilListComponent,
+    VigilShowComponent
   ]
 })
 
