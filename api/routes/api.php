@@ -34,11 +34,12 @@ Route::middleware(['auth:admin', 'cors'])->group(function () {
     Route::get('/repreneurs', [AdminController::class, 'repreneurs']);
 });
 
-Route::prefix('vigil')->middleware(['auth:admin', 'cors'])->group(function () {
-    Route::get('/all', [VigilController::class, 'index']);
+Route::prefix('vigil')->middleware(['auth:admin'])->group(function () {
+    Route::get('/', [VigilController::class, 'index']);
     Route::post('/create', [VigilController::class, 'store']);
-    Route::post('/delete/{vigil}', [VigilController::class, 'destroy']);
+    Route::delete('/delete/{vigil}', [VigilController::class, 'destroy']);
     Route::get('/show/{vigil}', [VigilController::class, 'show']);
+	Route::post('/edit/{vigil}', [VigilController::class, 'edit']);
 });
 
 
@@ -81,7 +82,7 @@ Route::prefix('vigil')->middleware(['auth:controller'])->group(function () {
         ->withoutMiddleware('auth:controller');
     Route::post('/logout', [VigilController::class, 'logout']);
 
-    Route::get('/', [VigilController::class, 'user']);
+    Route::get('/profile', [VigilController::class, 'user']);
     Route::post('/scanner', [VigilController::class, 'scanner']);
 });
 

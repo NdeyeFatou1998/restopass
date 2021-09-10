@@ -55,7 +55,7 @@ export class RestoEditComponent implements OnInit {
         this.isLoad = false;
         this.restoService.notify(
           "top",
-          "center",
+          "right",
           "Resto modifié avec succès.",
           "success"
         );
@@ -63,7 +63,7 @@ export class RestoEditComponent implements OnInit {
       },
       error: (errors) => {
         this.isLoad = false;
-        this.restoService.notify("top", "center", errors.message, "danger");
+        this.restoService.notify("top", "right", errors.message, "danger");
         this.destroyModal(null);
       },
     });

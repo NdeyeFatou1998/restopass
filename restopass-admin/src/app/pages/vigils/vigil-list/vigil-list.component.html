@@ -1,0 +1,114 @@
+<div class="main-content">
+    <div class="container-fluid" *ngIf="!isLoad; else loader">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="
+                card-title
+                d-flex
+                justify-content-between
+                align-items-center
+              ">
+                            <div>
+                                <h4 class="text-white">Liste des vigils</h4>
+                            </div>
+                            <div class="m-1">
+                                <button mat-mini-fab="mat-mini-fab" color="default" (click)="openCreateModal()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <ng-container *ngIf="vigils.length != 0; else elseTemplate">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <th>Matricule</th>
+                                        <th>Prénoms Nom</th>
+                                        <th>Téléphone</th>
+                                        <th>Resto</th>
+                                        <th>Carte d'accès</th>
+                                        <th class="text-center">Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let vigil of vigils">
+
+                                            <td>{{ vigil.matricule }}</td>
+                                            <td>{{ vigil.name }}</td>
+                                            <td>{{ vigil.telephone }}</td>
+                                            <td>
+                                                <div mat-raised-button (click)="changeVigilResto(vigil)">
+                                                    <ng-container>
+                                                        <span class="badge-success shadow-sm">{{ vigil.resto_name }}</span>
+                                                    </ng-container>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <button mat-mini-fab="mat-mini-fab" (click)="openQrCode(vigil)">
+                                                    <mat-icon>qr_code</mat-icon>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="mx-1">
+                                                        <button mat-mini-fab="mat-mini-fab" (click)="openEditModal(vigil)" color="primary">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="mx-1">
+                                                        <button (click)="onDeleteResto(vigil)" mat-mini-fab="mat-mini-fab" color="warn">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <div class="text-center m-3">
+                                    <nz-empty nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+                                        <ng-template #contentTpl>
+                                            <span> Liste vide </span>
+                                        </ng-template>
+                                        <ng-template #footerTpl>
+                                            <button mat-raised-button (click)="openCreateModal()">
+                                                Ajouter un resto
+                                            </button>
+                                        </ng-template>
+                                    </nz-empty>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</div>
+<ng-template #loader>
+    <div class="loader"></div>
+    <h4 class="text-center">Chargement en cours...</h4>
+</ng-template>
+
+<!-- QR CODE MODAL -->
+<nz-modal [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="qrCodeVisibility" [nzTitle]="qrCodeTitle" [nzFooter]="qrCodeFooter">
+    <ng-template #qrCodeTitle>
+        Carte d'accès de {{ selectedVigil.name }}
+    </ng-template>
+
+    <div *nzModalContent>
+        <div class="text-center">
+            <qr-code id="qrCodeImg" [mime]="png" [padding]="5" [value]="selectedVigil.matricule" [size]="200"></qr-code>
+        </div>
+    </div>
+    <ng-template #qrCodeFooter>
+        <button nz-button nzType="default" (click)="closeQrCodeModal()">Fermer</button>
+        <button nz-button nzType="primary" (click)="printQrCode('qrcodeimg')">Imprimer</button>
+    </ng-template>
+</nz-modal>

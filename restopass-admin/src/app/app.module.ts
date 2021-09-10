@@ -9,19 +9,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './app.component'; 
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { TableListComponent } from './table-list/table-list.component';
-import { TypographyComponent } from './typography/typography.component';
-import { IconsComponent } from './icons/icons.component';
-import { MapsComponent } from './maps/maps.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { UpgradeComponent } from './upgrade/upgrade.component';
-import {
-  AgmCoreModule
-} from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
@@ -31,6 +20,10 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { fr_FR } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import fr from '@angular/common/locales/fr';
+import { UserCreateComponent } from './pages/users/user-create/user-create.component';
+import { UserShowComponent } from './pages/users/user-show/user-show.component';
+import { UserEditComponent } from './pages/users/user-edit/user-edit.component';
+import { UserListComponent } from './pages/users/user-list/user-list.component';
 
 registerLocaleData(fr); 
 @NgModule({
@@ -45,16 +38,16 @@ registerLocaleData(fr);
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    }),
+    MatProgressSpinnerModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    
+    UserCreateComponent,
+    UserShowComponent,
+    UserEditComponent,
+    UserListComponent,
   ],
   providers: [{ provide: NZ_I18N, useValue: fr_FR }],
   bootstrap: [AppComponent]

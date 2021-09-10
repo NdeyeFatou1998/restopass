@@ -29,7 +29,6 @@ export class RestoListComponent implements OnInit {
   setFreeRestoRef: NzModalRef;
   constructor(
     private restoService: RestosService,
-    private fb: FormBuilder,
     private modalService: NzModalService
   ) {}
 
@@ -150,7 +149,7 @@ export class RestoListComponent implements OnInit {
         this.selectedResto = null;
         this.restoService.notify(
           "top",
-          "center",
+          "right",
           "Resto supprimé avec succès.",
           "success"
         );
@@ -158,7 +157,7 @@ export class RestoListComponent implements OnInit {
         this.deleteRestoRef.destroy();
       },
       error: (errors) => {
-        this.restoService.notify("top", "center", errors.message, "danger");
+        this.restoService.notify("top", "right", errors.message, "danger");
         this.deleteLoad = false;
         this.deleteRestoRef.destroy();
       },
