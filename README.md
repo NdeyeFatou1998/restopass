@@ -33,4 +33,7 @@ Captures d'écran:
 ![reset_pass](https://user-images.githubusercontent.com/58815209/131712128-b930d6a2-0f27-4947-8b41-6a84456c13f9.png)
 
 
+# Application administrateur
+
+![Capture d’écran de 2021-09-10 00-10-32](https://user-images.githubusercontent.com/58815209/132778426-45d96be8-6dd7-451e-ad3d-225f499b5f74.png)
 
