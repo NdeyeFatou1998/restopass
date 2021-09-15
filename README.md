@@ -36,3 +36,16 @@ Captures d'écran:
 # Application administrateur
 
 ![Capture d’écran de 2021-09-14 13-53-02](https://user-images.githubusercontent.com/58815209/133270586-dfa0eb91-5465-4475-a0e4-fd4decb7a127.png)
+
+- Gestion des Tarifs et Horaires des restos
+
+![Capture d’écran de 2021-09-15 23-44-02](https://user-images.githubusercontent.com/58815209/133527175-c40d0dd8-5ffe-4ee9-ab77-cee65af76036.png)
+
+- Gestion des vigils
+
+![Capture d’écran de 2021-09-15 23-44-48](https://user-images.githubusercontent.com/58815209/133527247-ddf3a597-5b83-47ec-a4d7-aec01c08a081.png)
+
+- Gestion des utilisateurs
+
+![Capture d’écran de 2021-09-15 23-45-38](https://user-images.githubusercontent.com/58815209/133527324-2cf6d48c-1d09-48a1-915e-ab34a9adfb4a.png)
+
