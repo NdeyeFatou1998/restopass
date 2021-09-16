@@ -18,16 +18,24 @@ class RestoController extends Controller
 
     public function index()
     {
-        $restos = DB::table("restos as R")
-            ->join('admins as A', 'A.id', 'R.repreneur_id')
-            ->join("universites as U", "U.id", "R.universite_id")
-            ->select("R.*", "A.name as repreneur_name", "A.email as repreneur_email", "U.name as universite")
-            ->get();
+        $restos = Resto::all();
+        $clts = collect($restos)->map(function($resto){
+           if($resto->repreneur_id != null) {
+               $r = Admin::find($resto->repreneur_id);
+                $resto->repreneur_name = $r->name;
+                $resto->repreneur_email = $r->email;
+           }
+           else{
+            $resto->repreneur_name = "Non défini";
+            $resto->repreneur_email = "Non défini";
+           }
+           return $resto;
+        });
         $repreneurs = Admin::role('repreneur')->get();
         $universites = Universite::all();
 
         return response()->json([
-            'restos' => $restos,
+            'restos' => $clts,
             'repreneurs' => $repreneurs,
             'universites' => $universites
         ], 200);
@@ -44,7 +52,7 @@ class RestoController extends Controller
         return response()->json($resto, 200);
     }
 
-	
+
     public function create(Request $request)
     {
         $request->validate([

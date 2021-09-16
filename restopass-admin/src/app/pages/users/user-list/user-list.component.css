@@ -1,0 +1,21 @@
+.badge-primary {
+    color: #ffffff;
+    background-color: #1441bb;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.badge-danger {
+    color: #ffffff;
+    background-color: #e83f3c;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.badge-danger:hover {
+    cursor: pointer;
+}
+
+.badge-success:hover {
+    cursor: pointer;
+}

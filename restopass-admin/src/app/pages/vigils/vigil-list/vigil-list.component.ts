@@ -1,25 +1,26 @@
-import { VigilEditComponent } from "./../vigil-edit/vigil-edit.component";
-import { Component, OnInit } from "@angular/core";
-import { Resto } from "app/models/resto";
-import { Vigil } from "app/models/vigil";
-import { VigilResponse } from "app/models/vigil-response";
-import { RestosService } from "app/services/restos.service";
-import { VigilService } from "app/services/vigil.service";
-import { NzModalRef, NzModalService } from "ng-zorro-antd/modal";
-import { VigilCreateComponent } from "../vigil-create/vigil-create.component";
+import { VigilEditComponent } from './../vigil-edit/vigil-edit.component';
+import { Component, OnInit } from '@angular/core';
+import { Resto } from 'app/models/resto';
+import { Vigil } from 'app/models/vigil';
+import { VigilResponse } from 'app/models/vigil-response';
+import { RestosService } from 'app/services/restos.service';
+import { VigilService } from 'app/services/vigil.service';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { VigilCreateComponent } from '../vigil-create/vigil-create.component';
 @Component({
-  selector: "vigil-list",
-  templateUrl: "./vigil-list.component.html",
-  styleUrls: ["./vigil-list.component.css"],
+  // tslint:disable-next-line:component-selector
+  selector: 'vigil-list',
+  templateUrl: './vigil-list.component.html',
+  styleUrls: ['./vigil-list.component.css'],
 })
 export class VigilListComponent implements OnInit {
   vigils: Vigil[];
   restos: Resto[];
   vigilResponse: VigilResponse;
 
-  isLoad: boolean = true;
+  isLoad = true;
   selectedVigil: Vigil;
-  qrCodeVisibility: boolean = false;
+  qrCodeVisibility: boolean;
   deleteRestoRef: NzModalRef<unknown, any>;
   deleteLoad: boolean;
   constructor(
@@ -52,7 +53,7 @@ export class VigilListComponent implements OnInit {
    */
   openCreateModal() {
     const ref = this.modalService.create({
-      nzTitle: "Ajouter un nouvea vigil",
+      nzTitle: 'Ajouter un nouvea vigil',
       nzContent: VigilCreateComponent,
       nzComponentParams: {
         restos: this.restos,
@@ -65,20 +66,20 @@ export class VigilListComponent implements OnInit {
 
   /**
    * Update the list of restos
-   * @param resto new resto
+   * @param vigil
    */
   onCreateVigil(vigil: Vigil) {
-    if (vigil != null) this.vigils.unshift(vigil);
+    if (vigil != null) { this.vigils.unshift(vigil); }
   }
 
   /**
    * Open the edit modal
-   * @param resto resto to edit
+   * @param vigil
    */
   openEditModal(vigil: Vigil) {
     this.selectedVigil = vigil;
     const ref = this.modalService.create({
-      nzTitle: "Ajouter un nouvea vigil",
+      nzTitle: 'Ajouter un nouvea vigil',
       nzContent: VigilEditComponent,
       nzComponentParams: {
         restos: this.restos,
@@ -92,30 +93,31 @@ export class VigilListComponent implements OnInit {
 
   /**
    * update the list of resto
-   * @param resto resto to edit
+   * @param vigil
    */
    onEditVigil(vigil: Vigil): void {
-     console.log("AFTER UPDATE", vigil,'INDEX OF',this.vigils.indexOf(this.selectedVigil));
-     
-    if (vigil != null)
+     console.log('AFTER UPDATE', vigil, 'INDEX OF', this.vigils.indexOf(this.selectedVigil));
+
+    if (vigil != null) {
       this.vigils.splice(this.vigils.indexOf(this.selectedVigil), 1, vigil);
+    }
     this.selectedVigil = null;
   }
 
   /**
    * On delete btn clicked
-   * @param resto resto to delete
+   * @param vigil
    */
   onDeleteResto(vigil: Vigil) {
+    // @ts-ignore
     this.deleteRestoRef = this.modalService.confirm({
-      nzTitle: "<i>Voulez-vous vraiment supprimé ce vigil?</i>",
-      nzContent:
-        "<b style='color: red;'>Veuillez donner votre confirmation</b>",
-      nzOkText: "Oui",
-      nzOkType: "primary",
+      nzTitle: '<i>Voulez-vous vraiment supprimé ce vigil?</i>',
+      nzContent: '<b style="color: red; ">Veuillez donner votre confirmation</b>',
+      nzOkText: 'Oui',
+      nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => this.deleteResto(vigil),
-      nzCancelText: "Annuler",
+      nzCancelText: 'Annuler',
       nzOkLoading: this.deleteLoad,
       nzMaskClosable: false,
       nzClosable: false,
@@ -124,7 +126,7 @@ export class VigilListComponent implements OnInit {
 
   /**
    * Delete resto in DB
-   * @param resto resto to delete
+   * @param vigil
    */
   deleteResto(vigil: Vigil): false | void | {} | Promise<false | void | {}> {
     this.selectedVigil = vigil;
@@ -134,16 +136,16 @@ export class VigilListComponent implements OnInit {
         this.vigils.splice(this.vigils.indexOf(this.selectedVigil), 1);
         this.selectedVigil = null;
         this.restoService.notify(
-          "top",
-          "right",
-          "Vigil supprimé avec succès.",
-          "success"
+          'top',
+          'right',
+          'Vigil supprimé avec succès.',
+          'success'
         );
         this.deleteLoad = false;
         this.deleteRestoRef.destroy();
       },
       error: (errors) => {
-        this.restoService.notify("top", "right", errors.message, "danger");
+        this.restoService.notify('top', 'right', errors.message, 'danger');
         this.deleteLoad = false;
         this.deleteRestoRef.destroy();
       },
@@ -162,6 +164,6 @@ export class VigilListComponent implements OnInit {
   }
 
   printQrCode() {
-    let element = document.getElementById("qrcodeimg");
+    const element = document.getElementById('qrcodeimg');
   }
 }

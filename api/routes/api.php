@@ -9,6 +9,7 @@ use App\Http\Controllers\PayTechController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\ParamsController;
 
 /**
  * AUTH ROUTES
@@ -19,13 +20,29 @@ Route::prefix('admin')->middleware(['auth:admin', 'cors'])->group(function () {
         ->name('admin-login')
         ->withoutMiddleware('auth:admin');
 
-    Route::post('/register', [AuthController::class, 'register'])
-        ->name('admin-register');
-
     Route::post('admin/logout', [AuthController::class, 'logout'])
         ->name("admin-logout");
 
+    Route::post('/create', [AdminController::class, 'create'])
+        ->name('admin-register');
+    Route::get('/profile', [AuthController::class, 'profile']);
+
+
+    Route::get('/show/{admin}', [AdminController::class, 'show']);
+    Route::get('/', [AdminController::class, 'index']);
+    Route::delete('/delete/{admin}', [AdminController::class, 'destroy']);
+    Route::put('/edit/{admin}', [AdminController::class, 'edit']);
+
     Route::post('affecter-vigil', [VigilController::class, 'affecterA']);
+});
+
+Route::prefix('permissions')->middleware(['auth:admin', 'role:super-admin'])->group(function (){
+    Route::put('/{admin}', [AdminController::class, 'givePermissions']);
+    Route::get('/', [AdminController::class, 'permissions']);
+});
+
+Route::prefix('params')->middleware(['auth:admin', 'role:super-admin'])->group(function (){
+    Route::get('/horaires', [ParamsController::class, 'index']);
 });
 
 // REPRENEUR
@@ -39,7 +56,7 @@ Route::prefix('vigil')->middleware(['auth:admin'])->group(function () {
     Route::post('/create', [VigilController::class, 'store']);
     Route::delete('/delete/{vigil}', [VigilController::class, 'destroy']);
     Route::get('/show/{vigil}', [VigilController::class, 'show']);
-	Route::post('/edit/{vigil}', [VigilController::class, 'edit']);
+    Route::post('/edit/{vigil}', [VigilController::class, 'edit']);
 });
 
 
@@ -49,7 +66,7 @@ Route::prefix('resto')->middleware(['auth:admin'])->group(function () {
     Route::delete('/delete/{resto}', [RestoController::class, 'destroy']);
     Route::get('/show/{resto}', [RestoController::class, 'show']);
     Route::post('/edit/{resto}', [RestoController::class, 'edit']);
-	Route::put('/status/{resto}', [RestoController::class, 'setIsFree']);
+    Route::put('/status/{resto}', [RestoController::class, 'setIsFree']);
 });
 
 Route::prefix('etudiant')->middleware(['auth:api'])->group(function () {
@@ -99,3 +116,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/pay-success', [PayTechController::class, 'succss'])
         ->withoutMiddleware('auth:api');
 });
+
+Route::get('roles', [AdminController::class, 'roles'])->middleware('auth:admin');

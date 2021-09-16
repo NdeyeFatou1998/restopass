@@ -1,1 +1,87 @@
-<p>user-list works!</p>
+<div class="main-content">
+    <div class="container-fluid" *ngIf="!isLoad; else loader">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="card-title d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="text-white">administrateurs</h4>
+                            </div>
+                            <div class="m-1">
+                                <button mat-mini-fab="mat-mini-fab" color="default" (click)="openCreateModal()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <ng-container *ngIf="users.length != 0; else elseTemplate">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <th class="text-center">Profile</th>
+                                        <th class="text-center">Prénom Nom</th>
+                                        <th class="text-center">Adresse Email</th>
+                                        <th class="text-center">Rôles</th>
+                                        <th class="text-center">Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let user of users">
+                                            <td>
+                                                <nz-avatar [nzSize]="50" class="text-center shadow" nzIcon="user" [nzSrc]="userProfile(user)"></nz-avatar>
+                                            </td>
+                                            <td class="text-center">{{ user.name }}</td>
+                                            <td class="text-center">{{ user.email }}</td>
+                                            <td class="text-center">
+                                                <ng-container *ngIf="user.roles.length == 0; else elseUserRoles">
+                                                    <span class="badge-danger">Aucun role</span>
+                                                </ng-container>
+                                                <ng-template #elseUserRoles>
+                                                    <span *ngFor="let r of user.roles" class="badge-primary mx-1">{{ r }}</span>
+                                                </ng-template>
+
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="mx-1">
+                                                        <button (click)="openEditModal(user)" mat-mini-fab="mat-mini-fab" color="primary">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="mx-1">
+                                                        <button (click)="openDeleteModal(user)" mat-mini-fab="mat-mini-fab" color="warn">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <div class="text-center m-3">
+                                    <nz-empty nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+                                        <ng-template #contentTpl>
+                                            <span>Liste vide</span>
+                                        </ng-template>
+                                        <ng-template #footerTpl>
+                                            <button mat-raised-button (click)="openCreateModal()">
+                                                Ajouter un resto
+                                            </button>
+                                        </ng-template>
+                                    </nz-empty>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #loader>
+    <div class="loader"></div>
+    <h4 class="text-center">Chargement en cours...</h4>
+</ng-template>

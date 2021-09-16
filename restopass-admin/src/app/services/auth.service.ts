@@ -19,8 +19,6 @@ export class AuthService extends BaseService {
   }
 
   login(username: string, password: string) {
-    console.log("API", this.api);
-    
     return this.http.post<LoginResponse>(this.api + "admin/login",
       {
         email: username,
