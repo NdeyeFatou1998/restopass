@@ -17,4 +17,11 @@ export class ParamsService extends BaseService {
       observe: "body",
     });
   }
+
+  statistics(){
+    return this.http.get<any>(this.api + this.baseUrl + "statistics", {
+      headers: this.authorizationHeaders,
+      observe: "body",
+    });
+  }
 }

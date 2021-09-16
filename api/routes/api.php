@@ -43,6 +43,7 @@ Route::prefix('permissions')->middleware(['auth:admin', 'role:super-admin'])->gr
 
 Route::prefix('params')->middleware(['auth:admin', 'role:super-admin'])->group(function (){
     Route::get('/horaires', [ParamsController::class, 'index']);
+    Route::get('/statistics', [ParamsController::class, 'statistics']);
 });
 
 // REPRENEUR

@@ -11,6 +11,7 @@ import { Router, NavigationEnd, NavigationStart } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 import PerfectScrollbar from "perfect-scrollbar";
 import * as $ from "jquery";
+import { ParamsService } from "app/services/params.service";
 
 @Component({
   selector: "app-admin-layout",
@@ -22,12 +23,13 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
   isLoad: boolean = true;
-  constructor(public location: Location, private router: Router) {}
+  constructor(public location: Location, private router: Router) { }
 
   ngOnInit() {
+    this.isLoad = true;
     setTimeout(() => {
-      this.isLoad = !this.isLoad;
-    }, 5000);
+      this.isLoad = false;
+    }, 3000);
   }
 
   ngAfterViewInit() {
