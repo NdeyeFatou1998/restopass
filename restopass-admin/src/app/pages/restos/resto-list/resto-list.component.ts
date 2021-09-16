@@ -140,7 +140,7 @@ export class RestoListComponent implements OnInit {
    * Delete resto in DB
    * @param resto resto to delete
    */
-  deleteResto(resto: Resto): false | void | {} | Promise<false | void | {}> {
+  deleteResto(resto: Resto) {
     this.selectedResto = resto;
     this.deleteLoad = true;
     this.restoService.delete(resto).subscribe({

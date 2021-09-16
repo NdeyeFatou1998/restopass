@@ -18,7 +18,6 @@ class CreateVigilsTable extends Migration
             $table->string("name");
             $table->string("telephone");
             $table->string("matricule")->unique();
-            $table->string("email")->unique();
             $table->string("password");
             $table->string("image_path")->nullable();
 

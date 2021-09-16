@@ -27,7 +27,6 @@ import { RestoEditComponent } from 'app/pages/restos/resto-edit/resto-edit.compo
 import { RestoListComponent } from 'app/pages/restos/resto-list/resto-list.component';
 import {MatTableModule} from '@angular/material/table'; 
 import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -35,6 +34,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { QRCodeModule } from 'angular2-qrcode';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { UserCreateComponent } from 'app/pages/users/user-create/user-create.component';
+import { UserListComponent } from 'app/pages/users/user-list/user-list.component';
+import { UserShowComponent } from 'app/pages/users/user-show/user-show.component';
+import { UserEditComponent } from 'app/pages/users/user-edit/user-edit.component';
+import { HorairesComponent } from 'app/pages/params/horaires/horaires.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -49,7 +55,6 @@ import { QRCodeModule } from 'angular2-qrcode';
     MatTooltipModule,
     MatTableModule,
     MatIconModule,
-    MatProgressSpinnerModule,
     NzEmptyModule,
     NzModalModule,
     NzInputModule,
@@ -57,6 +62,7 @@ import { QRCodeModule } from 'angular2-qrcode';
     NzSelectModule,
     NzButtonModule,
     QRCodeModule,
+    NzAvatarModule,
   ],
   declarations: [
     DashboardComponent,
@@ -74,7 +80,12 @@ import { QRCodeModule } from 'angular2-qrcode';
     VigilCreateComponent,
     VigilEditComponent,
     VigilListComponent,
-    VigilShowComponent
+    VigilShowComponent,
+    UserListComponent,
+    UserCreateComponent,
+    UserShowComponent,
+    UserEditComponent,
+    HorairesComponent,
   ]
 })
 

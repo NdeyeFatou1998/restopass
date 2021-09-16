@@ -18,10 +18,6 @@ class CreateTarifsTable extends Migration
             $table->string("name");
             $table->integer("price");
             $table->integer("code")->unique();
-            $table->foreignId("edit_by");
-            $table->foreignId("update_by");
-            $table->foreign("edit_by")->references("id")->on("admins");
-            $table->foreign("update_by")->references("id")->on("admins");
             $table->timestamps();
         });
     }

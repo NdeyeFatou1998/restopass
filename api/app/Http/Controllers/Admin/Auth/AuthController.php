@@ -41,34 +41,12 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Register method
-     * @param Request $request (name, email, roles)
-     */
-    public function register(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'email|required|unique:admins',
-            'roles' => 'required|array|exists:roles,name',
-            'password' => 'required'
-        ]);
-
-        $user = new Admin();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        $user->assignRole($request->roles);
-
-        return response()->json([
-            'message' => "administrateur créé avec succès.",
-            'roles' => $request->roles
-        ], 200);
-    }
-
     public function logout(Request $request)
     {
+    }
+
+    public function profile()
+    {
+        return auth()->user();
     }
 }

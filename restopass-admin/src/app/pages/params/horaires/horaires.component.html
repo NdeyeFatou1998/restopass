@@ -1,0 +1,39 @@
+<div class="main-content">
+    <div class="container-fluid" *ngIf="!isLoad; else loader">
+        <div class="d-flex justify-center-between">
+            <div *ngFor="let item of horaires" class="m-3">
+                <div class="card" style="width: 16rem;">
+                    <img [src]="horaireImg(item)" class="card-img-top img-60" alt="{{ item.tarif.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.tarif.name }}</h5>
+                        <p class="card-text">
+                            <b>Tarif: </b><strong class="bold text-danger">{{ item.tarif.price }} FCFA</strong><br>
+                            <b>Ouverture: </b> <strong class="bold text-primary">{{ getTime(item.open) }}</strong><br>
+                            <b>Fermeture: </b> <strong class="bold text-primary">{{ getTime(item.close) }}</strong>
+                        </p>
+                        <button mat-mini-fab (click)="openEditModal(item)" color="primary">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #loader>
+    <div class="loader"></div>
+    <h4 class="text-center">Chargement en cours...</h4>
+</ng-template>
+
+<nz-modal [(nzVisible)]="editModalVisil" nzTitle="Modifier" [nzContent]="editModalBody">
+    <ng-template #editModalBody>
+        <p>{{ selectedHoraire.id }}</p>
+        <p>Content two</p>
+        <p>Content three</p>
+    </ng-template>
+    <div *nzModalFooter>
+        <span>Modal Footer:</span>
+        <button nz-button nzType="default" (click)="this.editModalVisil = false">Fermer</button>
+        <button nz-button nzType="primary" (click)="editHoraire()" [nzLoading]="isConfirmLoading">Modifier</button>
+    </div>
+</nz-modal>

@@ -11,16 +11,15 @@ class Admin extends Authenticatable
 {
     use HasFactory, HasRoles, HasApiTokens;
 
-    protected $fillable = ['name', 'email', 'password', 'roles'];
+    protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = [
         'password',
         'remember_token',
         'created_at',
         'updated_at',
-        'roles'
     ];
-    
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

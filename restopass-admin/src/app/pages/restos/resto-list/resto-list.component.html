@@ -29,7 +29,6 @@
                                         <th>Capacité</th>
                                         <th>Repreneur</th>
                                         <th>Repreneur Email</th>
-                                        <th>Université</th>
                                         <th>Mode</th>
                                         <th class="text-center">Actions</th>
                                     </thead>
@@ -39,7 +38,6 @@
                                             <td>{{ resto.capacity }}</td>
                                             <td>{{ resto.repreneur_name }}</td>
                                             <td>{{ resto.repreneur_email }}</td>
-                                            <td>{{ resto.universite }}</td>
                                             <td>
                                                 <div mat-raised-button (click)="onFreeResto(resto)">
                                                     <ng-container *ngIf="resto.is_free; else notFree">

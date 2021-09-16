@@ -64,6 +64,8 @@ class PermissionSeeder extends Seeder
 
         $admin->givePermissionTo('show univ');
 
+        $superAdmin->syncPermissions($permissions);
+
         $user = \App\Models\Admin::create([
             'id' => 3,
             'name' => 'Super-Admin',

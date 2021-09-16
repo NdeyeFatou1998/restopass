@@ -35,7 +35,7 @@ class VigilController extends Controller
      */
     public function index()
     {
-$vigils = DB::table("vigils as V")->join("restos as R","R.id","V.resto_id")->select("V.name","V.id", "V.email","V.matricule","V.telephone","V.resto_id","R.name as resto_name")->get();
+$vigils = DB::table("vigils as V")->join("restos as R","R.id","V.resto_id")->select("V.name","V.id","V.matricule","V.telephone","V.resto_id","R.name as resto_name")->get();
         return response()->json([
             'vigils' => $vigils,
             'restos' => Resto::all(),
@@ -61,7 +61,6 @@ $vigils = DB::table("vigils as V")->join("restos as R","R.id","V.resto_id")->sel
         $vigil = new Vigil();
         $vigil->name = $request->name;
         $vigil->telephone = $request->telephone;
-        $vigil->email = self::PREFIX_EMAIL . $num . self::SUFFIX_MAIL;
         $vigil->password = bcrypt(static::BASE_MATRICULE);
         $vigil->matricule = "RPV-" . time();
 		$vigil->resto_id = $request->resto_id;

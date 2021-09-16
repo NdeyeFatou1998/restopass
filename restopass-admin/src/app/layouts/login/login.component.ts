@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
         this.authService.setToken(response.token);
         this.authService.setUser(response.user);
         this.authService.setRoles(response.roles);
-        console.log(response);
         this.router.navigate(['dashboard']);
         this.isLoad = false;
       },

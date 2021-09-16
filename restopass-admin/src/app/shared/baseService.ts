@@ -61,6 +61,10 @@ export class BaseService {
     return this._host;
   }
 
+  hasRole(role: string): boolean{
+    return this.getRoles().some((x) => x === role);
+  }
+
   notify(from: string, align: string, message: string, color: string) {
     $.notify(
       {
@@ -69,7 +73,7 @@ export class BaseService {
       },
       {
         type: color,
-        timer: 2000,
+        timer: 1000,
         placement: {
           from: from,
           align: align,

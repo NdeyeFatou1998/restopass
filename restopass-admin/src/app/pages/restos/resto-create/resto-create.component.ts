@@ -52,7 +52,7 @@ export class RestoCreateComponent implements OnInit {
         this.destroyModal(response);
         this.restoService.notify(
           "top",
-          "center",
+          "right",
           "Resto ajouté avec succès.",
           "success"
         );
@@ -60,7 +60,7 @@ export class RestoCreateComponent implements OnInit {
       error: (errors) => {
         console.log(errors);
         this.destroyModal(null);
-        this.restoService.notify("top", "center", errors.message, "danger");
+        this.restoService.notify("top", "right", errors.message, "danger");
       },
     });
   }

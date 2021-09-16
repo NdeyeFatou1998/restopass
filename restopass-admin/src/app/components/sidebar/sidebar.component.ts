@@ -17,27 +17,40 @@ export const ROUTES: RouteInfo[] = [
     class: "",
     roles: ["super-admin"],
   },
-  
   {
     path: "/restos",
     title: "Gestion des restos",
     icon: "restaurant",
     class: "",
-    roles: ["super-admin", "repreneur"],
+    roles: ["super-admin", "repreneur", "admin"],
   },
   {
     path: "/vigils",
     title: "Gestion des vigils",
     icon: "supervised_user_circle",
     class: "",
+    roles: ["super-admin", "admin"],
+  },
+  {
+    path: "/users",
+    title: "Administrateurs",
+    icon: "admin_panel_settings",
+    class: "",
     roles: ["super-admin"],
+  },
+  {
+    path: "/horaires",
+    title: "Gestion des horaires",
+    icon: "watch_later",
+    class: "",
+    roles: ["super-admin",],
   },
   {
     path: "/user-profile",
     title: "Parametres",
     icon: "settings",
     class: "",
-    roles: ["super-admin"],
+    roles: ["super-admin", "admin", "repreneur"],
   },
 ];
 

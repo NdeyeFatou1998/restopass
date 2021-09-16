@@ -20,10 +20,8 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { fr_FR } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import fr from '@angular/common/locales/fr';
-import { UserCreateComponent } from './pages/users/user-create/user-create.component';
-import { UserShowComponent } from './pages/users/user-show/user-show.component';
-import { UserEditComponent } from './pages/users/user-edit/user-edit.component';
-import { UserListComponent } from './pages/users/user-list/user-list.component';
+import { HorairesComponent } from './pages/params/horaires/horaires.component';
+import { TarifsComponent } from './pages/params/tarifs/tarifs.component';
 
 registerLocaleData(fr); 
 @NgModule({
@@ -44,10 +42,7 @@ registerLocaleData(fr);
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    UserCreateComponent,
-    UserShowComponent,
-    UserEditComponent,
-    UserListComponent,
+    TarifsComponent,
   ],
   providers: [{ provide: NZ_I18N, useValue: fr_FR }],
   bootstrap: [AppComponent]
