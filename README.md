@@ -15,18 +15,36 @@ Captures d'écran:
 Captures d'écran:
 
 - Page de connexion
+- Création d'un nouveau code pin
 - Page de Demande de code pin
 
-![et_app_login](https://user-images.githubusercontent.com/58815209/131547984-ca9d2743-e96e-400e-b670-c3265df3bc5a.png)
+![auths_page](https://user-images.githubusercontent.com/58815209/131711739-e32a4c96-af56-4989-abc1-73b8f74cefdf.png)
 
 - Page Profile utilisateur
 - Page de Transfert d'argent
 - Page pour la liste de visites aux restos
+- Page de configuration
 
-![home_page](https://user-images.githubusercontent.com/58815209/131548743-ada84764-1cd9-4add-99bc-138e35564264.png)
+![home_page](https://user-images.githubusercontent.com/58815209/131711847-caaaa667-6865-4a9b-bb2c-f2ddfa545a58.png)
 
 - Page de réinitialisation de mot de passe
 - Page de définition d'un nouveau mot de passe
 
-![pass_ouboie](https://user-images.githubusercontent.com/58815209/131549350-ae819001-a76d-4048-be7d-b4913ed40e02.png)
+![reset_pass](https://user-images.githubusercontent.com/58815209/131712128-b930d6a2-0f27-4947-8b41-6a84456c13f9.png)
 
+
+# Application administrateur
+
+![Capture d’écran de 2021-09-16 19-15-09](https://user-images.githubusercontent.com/58815209/133689278-515eab5a-9021-442a-8d60-e4245c84a0fd.png)
+
+- Gestion des Tarifs et Horaires des restos
+
+![Capture d’écran de 2021-09-15 23-44-02](https://user-images.githubusercontent.com/58815209/133527175-c40d0dd8-5ffe-4ee9-ab77-cee65af76036.png)
+
+- Gestion des vigils
+
+![Capture d’écran de 2021-09-15 23-44-48](https://user-images.githubusercontent.com/58815209/133527247-ddf3a597-5b83-47ec-a4d7-aec01c08a081.png)
+
+- Gestion des utilisateurs
+
+![Capture d’écran de 2021-09-15 23-45-38](https://user-images.githubusercontent.com/58815209/133527324-2cf6d48c-1d09-48a1-915e-ab34a9adfb4a.png)
